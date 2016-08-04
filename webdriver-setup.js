@@ -39,7 +39,7 @@ exports.template = function() {
     return "http://www-stage.insidehook.com/new-york/apps/";
   }
   else if( argv.template == 'main-category') {
-    return "http://www-stage.insidehook.com/new-york/where-to-go";
+    return "http://www-stage.insidehook.com/new-york/what-to-buy/";
   }
   else if( argv.template == 'featured') {
     return "http://www-stage.insidehook.com/nation/mclarens-one-off-570s-formula-1-tribute-is-a-piece/";

@@ -6,10 +6,10 @@ chai.use(require('chai-as-promised'));
 exports.citiesLink = function(driver) {
 
   // find all elements on global-nav top-bar with dropdown class
-  // cities tab is assumed to be the 4th element
+  // cities tab is assumed to be the last element
   var categories = driver.findElements(webdriver.By.css(".global-navigation.top-bar .left.show-for-large-up .has-dropdown.not-click"));
   categories.then(function(categories) {
-    var cities = categories[3].findElement(webdriver.By.tagName("a"));
+    var cities = categories[categories.length-1].findElement(webdriver.By.tagName("a"));
     cities.getText().then(function(currentCity) {
       driver.actions().mouseMove(cities).perform();
       driver.sleep(1000);

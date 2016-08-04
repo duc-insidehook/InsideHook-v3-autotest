@@ -22,10 +22,12 @@ main-content:
 	mocha ./main-content/main-content-test.js $(OPT) $(FLAGS)
 sub-content:
 	mocha ./sub-content/sub-content-test.js $(OPT) $(FLAGS)
+subcat-header:
+	mocha ./subcat-header/subcat-header-test.js $(OPT) $(FLAGS)
 
 
 
-HOME_TESTS = global-nav subscribe large-carousel featured-grid \
+HOME_TESTS = global-nav subcat-header subscribe large-carousel featured-grid \
 	content-feed social-carousel home-ads trending-tags
 home:
 	for target in $(HOME_TESTS); do \
@@ -53,6 +55,7 @@ featured:
 	done
 
 .PHONY: global-nav subscribe large-carousel featured-grid content-feed \
-	social-carousel home-ads trending-tags main-content sub-content
+	social-carousel home-ads trending-tags main-content sub-content \
+	subcat-header
 
 

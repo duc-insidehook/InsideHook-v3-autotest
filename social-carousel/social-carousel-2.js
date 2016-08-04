@@ -6,8 +6,8 @@ chai.use(require('chai-as-promised'));
     
 exports.socialIcons = function(driver, rawTemplate) {
 
-  if( rawTemplate=='category') {
-    console.log('test is not applicable');
+  if( rawTemplate=='main-category') {
+    console.log('\t- the test bellow is not applicable on this template');
   } else { // home template
 
   	// wait for the small carousel to appear
@@ -28,7 +28,7 @@ exports.socialIcons = function(driver, rawTemplate) {
       
       // Test fb Icon
       fbIcon.sendKeys(webdriver.Key.ESCAPE); // need for firefox, optional for chrome  
-      fbIcon.click();
+      fbIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
         expect(tabs.length).to.equal(2);
 
@@ -39,7 +39,7 @@ exports.socialIcons = function(driver, rawTemplate) {
       });
 
       // Test gram Icon
-      gramIcon.click();
+      gramIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
         expect(tabs.length).to.equal(2);
 
@@ -50,7 +50,7 @@ exports.socialIcons = function(driver, rawTemplate) {
       });
 
       // Test twitter Icon
-      twitIcon.click();
+      twitIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
         expect(tabs.length).to.equal(2);
 

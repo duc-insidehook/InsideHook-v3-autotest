@@ -27,8 +27,10 @@ test.describe('Social Carousel', function() {
   test.beforeEach(function() {
     this.timeout(generalSetup.loadTemplateTimeout());
     driver.get(webdriverSetup.template());
+    driver.sleep(generalSetup.pageLoadTime());
     driver.manage().window().maximize();
   });
+  
   
   test.it('small carousel appears as expected', function() {
     socialCarousel1.appear(driver);
@@ -39,11 +41,11 @@ test.describe('Social Carousel', function() {
   test.it('display correct items', function() {
     socialCarousel3.carouselItemsDisplay(driver, rawTemplate);
   }); 
-  test.it('300x300 for each item in carousel', function() {
-    socialCarousel4.itemSize(driver);
+  test.it('300x300 for each item, goods item have description panel', function() {
+    socialCarousel4.itemsFeature(driver, rawTemplate);
   });
   test.it('items click through to appropriate destination', function() {
-    socialCarousel5.carouselItemsClick(driver);
+    socialCarousel5.carouselItemsClick(driver, rawTemplate);
   });
   test.it('click and drag to advance the slide', function() {
     socialCarousel6.clickAndDrag(driver);
