@@ -1,5 +1,7 @@
-var formPosition = 'top', // top, right, or bot
-    webdriver = require('selenium-webdriver'),
+/**
+ *  Import Modules and Files
+ */
+var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
@@ -17,16 +19,27 @@ var formPosition = 'top', // top, right, or bot
     subscribeForm12 = require('./subscribe-form-12.js'),
     subscribeForm13 = require('./subscribe-form-13.js'),
     driver;
+    
+/**
+ *  choose form position to test
+ *  'top' - subscribe button on global-nav bar
+ *  'right' - subscribe form on the right rail
+ *  'bot' - subscribe form on the bottom footer
+ */
+var formPosition = 'top',
+
 
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Subscribe Form', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -42,7 +55,7 @@ test.describe('Subscribe Form', function() {
     driver.manage().deleteAllCookies();
   });
 
-  
+  // Test Cases
   test.it('subscribe form pops up after clicking subscribe hyperlink', function() {
     subscribeForm1.openForm(driver, formPosition);
   });

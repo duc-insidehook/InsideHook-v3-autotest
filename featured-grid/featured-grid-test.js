@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     rawTemplate = webdriverSetup.rawTemplate(),
@@ -10,15 +13,18 @@ var webdriver = require('selenium-webdriver'),
     featuredGrid5 = require('./featured-grid-5.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Featured Grid', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -29,6 +35,7 @@ test.describe('Featured Grid', function() {
     driver.manage().window().maximize();
   });
   
+  // Test Cases
   test.xit('featured items get a blue opaque overlay on hover', function() {
     featuredGrid1.opaqueOnHover(driver, rawTemplate);
   });

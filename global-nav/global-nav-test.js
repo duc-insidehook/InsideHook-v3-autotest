@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
@@ -10,15 +13,18 @@ var webdriver = require('selenium-webdriver'),
     globalNav6 = require('./global-nav-6.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Global Navigation', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -34,7 +40,7 @@ test.describe('Global Navigation', function() {
     driver.manage().deleteAllCookies();
   });
   
-  
+  // Test Cases  
   test.it('InsideHook logo clicks through to the homepage', function() {
     globalNav1.insidehookLogo(driver);
   });

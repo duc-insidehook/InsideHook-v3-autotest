@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
@@ -9,15 +12,18 @@ var webdriver = require('selenium-webdriver'),
     largeCarousel5 = require('./large-carousel-5.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Large Carousel', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -29,7 +35,7 @@ test.describe('Large Carousel', function() {
     driver.manage().window().maximize();
   });
   
-  
+  // Test Cases
   test.it('carousel auto advances', function() {
     largeCarousel1.autoAdvance(driver);
   });
@@ -45,5 +51,6 @@ test.describe('Large Carousel', function() {
   test.it('click the arrows to advance the slide', function() {
     largeCarousel5.slickArrows(driver);
   });
+  
 });
 

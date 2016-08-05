@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
@@ -9,15 +12,18 @@ var webdriver = require('selenium-webdriver'),
     mainContent5 = require('./main-content-5.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Main Content', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -29,7 +35,7 @@ test.describe('Main Content', function() {
     driver.manage().window().maximize();
   });
   
-
+  // Test Cases
   test.it('title and social icons appear as expected', function() {
     mainContent1.titleAndSocial(driver);
   });

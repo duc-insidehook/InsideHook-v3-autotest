@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
@@ -12,15 +15,18 @@ var webdriver = require('selenium-webdriver'),
     subContent8 = require('./sub-content-8.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Content Feed', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -28,11 +34,10 @@ test.describe('Content Feed', function() {
   test.beforeEach(function() {
     this.timeout(generalSetup.loadTemplateTimeout());
     driver.get(webdriverSetup.template());
-    // driver.sleep(generalSetup.pageLoadTime());
     driver.manage().window().maximize();
   });
 
-  
+  // Test Cases
   test.it('five items appear in The Latest', function() {
     subContent1.fiveItemsLatest(driver);
   }); 

@@ -1,4 +1,7 @@
-var webdriver = require('selenium-webdriver'),
+/**
+ *  Import Modules and Files
+ */
+ var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
@@ -6,15 +9,18 @@ var webdriver = require('selenium-webdriver'),
     trendingTags2 = require('./trending-tags-2.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Trending Tags', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -26,6 +32,7 @@ test.describe('Trending Tags', function() {
     driver.manage().window().maximize();
   });
 
+  // Test Cases
   test.it('four trending tags display', function() {
     trendingTags1.tagsDisplay(driver);
   });

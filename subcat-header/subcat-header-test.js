@@ -1,3 +1,6 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
@@ -6,15 +9,18 @@ var webdriver = require('selenium-webdriver'),
     subcatHeader2 = require('./subcat-header-2.js'),
     driver;
 
+
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Content Feed', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -25,7 +31,7 @@ test.describe('Content Feed', function() {
     driver.manage().window().maximize();
   });
 
-  
+  // Test Cases
   test.it('section has one h1 header and sub-categories', function() {
     subcatHeader1.appear(driver);
   });

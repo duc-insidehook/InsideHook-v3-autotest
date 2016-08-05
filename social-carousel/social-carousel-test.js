@@ -1,6 +1,8 @@
+/**
+ *  Import Modules and Files
+ */
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
-    rawTemplate = webdriverSetup.rawTemplate(),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
     socialCarousel1 = require('./social-carousel-1.js'),
@@ -9,17 +11,21 @@ var webdriver = require('selenium-webdriver'),
     socialCarousel4 = require('./social-carousel-4.js'),
     socialCarousel5 = require('./social-carousel-5.js'),
     socialCarousel6 = require('./social-carousel-6.js'),
-    driver;
+    driver, rawTemplate;
+
 
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
-  driver = webdriverSetup.localDriver();
+  driver = webdriverSetup.loadDriver();
+  rawTemplate = webdriverSetup.rawTemplate();
   driver.getWindowHandle();
 });
+
 
 test.after(function() {
   driver.quit();
 });
+
 
 test.describe('Social Carousel', function() {
   this.timeout(generalSetup.individualTestTimeout());
@@ -30,8 +36,8 @@ test.describe('Social Carousel', function() {
     driver.sleep(generalSetup.pageLoadTime());
     driver.manage().window().maximize();
   });
-  
-  
+
+  // Test Cases
   test.it('small carousel appears as expected', function() {
     socialCarousel1.appear(driver);
   }); 
