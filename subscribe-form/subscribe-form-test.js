@@ -1,11 +1,12 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    subscribeForm1 = require('./subscribe-form-1.js'),
+    driver;
+    
+//  Import Files
+var subscribeForm1 = require('./subscribe-form-1.js'),
     subscribeForm2 = require('./subscribe-form-2.js'),
     subscribeForm3 = require('./subscribe-form-3.js'),
     subscribeForm4 = require('./subscribe-form-4.js'),
@@ -17,8 +18,7 @@ var webdriver = require('selenium-webdriver'),
     subscribeForm10 = require('./subscribe-form-10.js'),
     subscribeForm11 = require('./subscribe-form-11.js'),
     subscribeForm12 = require('./subscribe-form-12.js'),
-    subscribeForm13 = require('./subscribe-form-13.js'),
-    driver;
+    subscribeForm13 = require('./subscribe-form-13.js');
     
 /**
  *  choose form position to test
@@ -59,7 +59,7 @@ test.describe('Subscribe Form', function() {
   test.it('subscribe form pops up after clicking subscribe hyperlink', function() {
     subscribeForm1.openForm(driver, formPosition);
   });
-  test.it('subscribe form has a \'X\' close', function() {
+  test.it('top subscribe form has a \'X\' close', function() {
     subscribeForm2.closeForm(driver, formPosition);
   }); 
   test.it('subsribe form has a sign up form with a <h3> description, email input, zipcode input, a Terms & Conditions checkbox (checked by default), and a submit button', function() {

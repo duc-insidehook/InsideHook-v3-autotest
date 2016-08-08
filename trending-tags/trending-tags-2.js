@@ -1,15 +1,25 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    trendingTags1 = require('./trending-tags-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+trendingTags1 = require('./trending-tags-1.js');
+
+/**
+ *  Trending tags click through to appropriate distination
+ *	- check tags' url
+ *	- click on a random tag
+ */
 exports.tagsClick = function(driver) {
 
 	var tags = trendingTags1.tagsDisplay(driver);
 	tags.then(function(tags) {
 
-		// test url of all four tags
+		// check tags' url
 		for(var i=0; i<tags.length; i++) {
 			var tagsUrl = tags[i].findElement(webdriver.By.css("a"));
 			tagsUrl.getAttribute('href').then(function(tagsUrl) {
@@ -17,10 +27,11 @@ exports.tagsClick = function(driver) {
 			});
 		}
 
-		// test opening a random tag
+		// click on a random tag
 		var testTags = Math.floor(Math.random() * tags.length);
 		var tagUrl = tags[testTags].findElement(webdriver.By.css("a"));
 		tagUrl.getAttribute('href').then(function(tagUrl) {
+			
 			tags[testTags].click();
 			driver.wait(webdriver.until.stalenessOf(tags[testTags]), 10000);
 			expect(driver.getCurrentUrl()).to.eventually.equal(tagUrl);

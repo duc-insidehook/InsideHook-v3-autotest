@@ -1,25 +1,39 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect,
-    testEmail = 'valid-email@insidehook.com',
-    subscribeForm5 = require('./subscribe-form-5.js');
+    testEmail = 'valid-email@insidehook.com';
+
+// Prerequisite Test
+var subscribeForm5 = require('./subscribe-form-5.js');
     
+
+/**
+ *	Thank you form notifies the user about the subscribed edition, and contains checkboxes for more editions
+ *	- subscribe to Insidehook with valid email
+ *	- thxForm won't show editions that user already subscribed to
+ *	- thxForm display user's email address and current edition
+ */
 exports.thxForm = function(driver, formPosition) {
 
 	// subscribe to Insidehook with valid email
 	var thxForm = subscribeForm5.validInput(driver, formPosition);
 
-	// elements
 	var informText = thxForm.findElement(webdriver.By.css(".signup-form p"));
 	var emailInput = thxForm.findElement(webdriver.By.css("#thanksForm .thx-email"));
 	var updateButton = thxForm.findElement(webdriver.By.css("#thanksForm button"));
   
-	/* the following assumptions are made for available editions
-		region 1: Nation
-		region 2: New York
-		region 3: LA
-		region 4: San Francisco
-		region 5: Chicago */
+	/** 
+	 *	thxForm won't show editions that user already subscribed to
+	 *	- the following assumptions are made for available editions
+	 *	- region 1: Nation
+	 *	- region 2: New York
+	 *	- region 3: LA
+	 *	- region 4: San Francisco
+	 *	- region 5: Chicago
+	 */
 	thxForm.findElement(webdriver.By.css("#region-1")).then(null, function(nationBox) {
 	if (nationBox.name === "NoSuchElementError")
 		console.log("\t- subscribed to Nation edition");
@@ -41,7 +55,7 @@ exports.thxForm = function(driver, formPosition) {
 	console.log("\t- subscribed to Chigago edition");
 	});
   
-  // thank you form display user's email address and current edition
+  // thxForm display user's email address and current edition
 	informText.getText().then(function(text) {
 		expect(text).to.have.string(testEmail).
 								and.have.string('New York');

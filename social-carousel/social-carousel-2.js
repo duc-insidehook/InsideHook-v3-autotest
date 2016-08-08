@@ -1,22 +1,34 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    socialCarousel1 = require('./social-carousel-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var socialCarousel1 = require('./social-carousel-1.js');
+
+
+/**
+ *  Social icons click through to appropriate destination
+ *  - retrieve social section 
+ *  - click on each social icon
+ */
 exports.socialIcons = function(driver, rawTemplate) {
 
   if( rawTemplate=='main-category') {
     console.log('\t- the test bellow is not applicable on this template');
-  } else { // home template
+  } 
+  else { // home template
 
-  	// wait for the small carousel to appear
+  	// retrieve social section 
   	var socialSection = socialCarousel1.appear(driver);
-
-  	// find all social buttons on social section
-    // social icons are expected to be listed in this order: fb, gram, twitter
     var socialIcons = socialSection.findElements(webdriver.By.css(".brand-social-buttons .button"));
     socialIcons.then(function(socialIcons) {
+      expect(socialIcons.length).to.equal(3);
+      
+      // social icons are expected to be listed in this order: fb, gram, twitter
       var fbIcon = socialIcons[0];
       var gramIcon = socialIcons[1];
       var twitIcon = socialIcons[2];

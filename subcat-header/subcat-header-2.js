@@ -1,18 +1,30 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    subcatHeader1 = require('./subcat-header-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
-    	
+
+// Prerequisite Test
+subcatHeader1 = require('./subcat-header-1.js');
+
+
+/**
+ *  Sub-categories click through to appropriate destination
+ *	- retrieve subCat list
+ *	- click on a random category
+ */
 exports.clickThrough = function(driver) {
 
 	// retrieve subCat list
 	var subcat = subcatHeader1.appear(driver);
 	subcat.then(function(subcat) {
 
-		// test opening a random cat, 
-		// avoid clicking more when there're more than 6 sub categories
+		/**
+		 *	click on a random category
+		 *	avoid clicking more when there're more than 6 sub categories
+		 */
 		var index = 5;
 		while( index==5) {
 			var index = Math.floor(Math.random() * subcat.length);

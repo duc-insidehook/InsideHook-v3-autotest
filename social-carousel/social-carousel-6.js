@@ -1,9 +1,18 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    socialCarousel1 = require('./social-carousel-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
     
+// Prerequisite Test
+var socialCarousel1 = require('./social-carousel-1.js');
+
+
+/**
+ *  Click and drag to advance the slide
+ */
 exports.clickAndDrag = function(driver) {
 
 	// wait for Insidehook on Social section to appear
@@ -27,7 +36,8 @@ exports.clickAndDrag = function(driver) {
 
 }
 
-getSlideIndex = function(driver) {
+
+var getSlideIndex = function(driver) {
   // get data slick index of the currently active slide
   activeSlide = driver.findElement(webdriver.By.css(".feed-item.allow-overlay.left.slick-slide.slick-current.slick-active"));
   var index = activeSlide.getAttribute('data-slick-index');

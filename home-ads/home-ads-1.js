@@ -1,8 +1,15 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+
+/**
+ *  728x90 appears below small carousel
+ */
 exports.bottomAdsAppear = function(driver) {
 
 	var ads = driver.findElement(webdriver.By.css(".row.ad-bottom.hide-for-small"));

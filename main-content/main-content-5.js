@@ -1,25 +1,41 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    mainContent1 = require('./main-content-1.js'),
+    expect = chai.expect;
+chai.use(require('chai-as-promised'));
+
+// Prerequisite Test
+var mainContent1 = require('./main-content-1.js'),
     mainContent2 = require('./main-content-2.js');
-  chai.use(require('chai-as-promised'));
-    
+
+
+/**
+ *  Social icons click through to appropriate destination
+ *  - retrive all social blocks
+ *  - put all social block into an array and test a random one
+ */
 exports.socialIcons = function(driver) {
 
-  // Gather social blocks from the featured page
-  var bodyElements = mainContent2.imageAndBody(driver);
+  // retrieve body contents
+  var bodyContents = mainContent2.imageAndBody(driver);
   // socialStick, tags, share, znetBlock
-  var verticalSocialBlock = bodyElements[0];
-  var bottomSocialBlock = bodyElements[2];
-  var topSocialBlock = artMasthead1.titleAndSocial(driver);
 
+  var verticalSocialBlock = bodyContents[0];
+  var bottomSocialBlock = bodyContents[2];
+  var topSocialBlock = mainContent1.headerAndSocial(driver);
+
+  // put all social block into an array and test a random one
 	var socialBlocks = [topSocialBlock, verticalSocialBlock, bottomSocialBlock];
   var index = Math.floor(Math.random() * socialBlocks.length);
-
   socialBlocks[index].then(function(socialBlock) {
+    
     var socialIcons = socialBlock.findElements(webdriver.By.css("a"));
     socialIcons.then(function(socialIcons) {
+      expect(socialIcons.length).to.equal(4);
+
+      // social icons are expected to be listed in this order: fb, linkedin, twitter, mail
       var fbIcon = socialIcons[0];
       var linkedinIcon = socialIcons[1];
       var twitIcon = socialIcons[2];
@@ -60,9 +76,11 @@ exports.socialIcons = function(driver) {
       mailIcon.click();
       driver.wait(webdriver.until.elementLocated(webdriver.By.css("#modal-send-to-friends")), 5000);
       driver.sleep(1000);
-      var stfModal = driver.findElement(webdriver.By.css("#modal-send-to-friends"));
-      var close = stfModal.findElement(webdriver.By.css(".close-reveal-modal"));
-      close.click();
+
+      var closeModal = driver.findElement(webdriver.By.css("#modal-send-to-friends .close-reveal-modal"));
+      closeModal.click();
+      driver.wait(webdriver.until.elementIsNotVisible(closeModal), 5000);
+      driver.sleep(1000);
 
     });
 	});

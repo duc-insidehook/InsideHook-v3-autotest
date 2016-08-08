@@ -1,17 +1,30 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    ads1 = require('./home-ads-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var	ads1 = require('./home-ads-1.js');
+
+
+/**
+ *  728x90 clicks through to approrpiate destination
+ *	- 728x90 appears below small carousel
+ *	- click ad and print title
+ */
 exports.bottomAdsClick = function(driver) {
 
+	// 728x90 appears below small carousel
 	var ads = ads1.bottomAdsAppear(driver);
+	
+	// click ad and print title
 	ads.click();
 	driver.sleep(1000);
-
-	// add assertion to ads
 	driver.getAllWindowHandles().then(function(tabs) {
+
     driver.switchTo().window(tabs[1]);
 		driver.getTitle().then(function(title) {
 			console.log("\tads redirect to \"" + title + "\"");

@@ -1,9 +1,21 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    subscribeForm1 = require('./subscribe-form-1');
+    expect = chai.expect;    
 chai.use(require('chai-as-promised'));
     
+// Prerequisite Test
+var	subscribeForm1 = require('./subscribe-form-1');
+
+
+/**
+ *  Subsribe form has a sign up form with a <h3> description, email input, zipcode input, 
+ *	 a Terms & Conditions checkbox (checked by default), and a submit button
+ *	- check form elements' visibility
+ *	- check form elements' type
+ */
 exports.displayForm = function(driver, formPosition) {
   
   // open Subscribe Form
@@ -23,7 +35,7 @@ exports.displayForm = function(driver, formPosition) {
 	var formElements = [description, emailInput, zipInput, joinButton, 
 									termsAndCons, emailError, termsError];
 
-	// check visibilities 
+	// check form elements' visibility
 	expect(description.isDisplayed()).to.eventually.equal(true);
 	expect(emailInput.isDisplayed()).to.eventually.equal(true);
 	expect(joinButton.isDisplayed()).to.eventually.equal(true);
@@ -32,7 +44,7 @@ exports.displayForm = function(driver, formPosition) {
 	if (formPosition == 'top' || formPosition == 'bot')
 		expect(zipInput.isDisplayed()).to.eventually.equal(true);
 
-	// check types
+	// check form elements' types
 	expect(emailInput.getTagName()).to.eventually.equal('input');
 	expect(joinButton.getTagName()).to.eventually.equal('button');
 	expect(termsAndCons.getTagName()).to.eventually.equal('input');

@@ -1,28 +1,41 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    contentFeed1 = require('./content-feed-1.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var contentFeed1 = require('./content-feed-1.js');
+
+
+/**
+ *  Items click through to appropriate destination
+ *	- click on the latest tab and expect 7 articles initially
+ *	- check articles' date, hour, edition
+ *	- check image's url and title's url
+ *	- open a one of the lastest three articles
+ */
 exports.clickContentFeed = function(driver) {
 
-	// select The Latest tab and make sure there'are 7 items initially
+	// click on the latest tab and expect 7 articles initially
 	var feedLatest = contentFeed1.sevenItemsLatest(driver);
 	var feedItems = feedLatest.findElements(webdriver.By.css("article"));
 	
 	feedItems.then(function(articles) {
-		// variables
-		var titleUrl = new Array(),
-				titleIndex = 0;
-
 		expect(articles.length).to.be.above(0);
+
+		var titleUrl = new Array(),
+				titleIndex = 0;  // use to loop through titleUrl
+
 		for(i=0; i<articles.length; i++) {
-			// expect every article has index, date, hour, and edition
+			// check articles' date, hour, edition
 			expect(articles[i].getAttribute("data-date")).to.eventually.not.equal(null);
 			expect(articles[i].getAttribute("data-hour")).to.eventually.not.equal(null);
 			expect(articles[i].getAttribute("data-edition")).to.eventually.not.equal(null);
 
-			// expect image's url and title's url of the same article to equal
+			// check image url's and title's url
 			var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
 			titleUrl[i] = articles[i].findElement(webdriver.By.css(".panel a")).getAttribute('href');
 			imageUrl.then(function(imageUrl) {
@@ -30,17 +43,20 @@ exports.clickContentFeed = function(driver) {
 			});
 		}
 		
-		// test opening a one of the lastest 3 articles
+		// open a one of the lastest three articles
 		var testArticle = Math.floor(Math.random() * 3);
 		var articleLink = articles[testArticle].findElement(webdriver.By.css(".panel a"));
 		articleLink.getAttribute('href').then(function(linkUrl) {
 			articleLink.sendKeys(webdriver.Key.ESCAPE);	// need for firefox, optional for chrome	
 			articleLink.click();
 			
+			// article within Insidehook domain
 			if (linkUrl.includes("insidehook")) {
 				driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
 				expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
-			} else { // if power by another party, link will be opened in a new tab
+			} 
+			// article power by another party - required opening new tab
+			else { 
 				driver.getAllWindowHandles().then(function(tabs) {
 					expect(tabs.length).to.equal(2);
       		driver.switchTo().window(tabs[1]);
@@ -48,8 +64,7 @@ exports.clickContentFeed = function(driver) {
       		driver.close(); driver.switchTo().window(tabs[0]);
       	});
 			}
-		});
-		
+		});		
 	});
-}
 
+}

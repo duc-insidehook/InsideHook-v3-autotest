@@ -1,16 +1,30 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
-    subscribeForm9 = require('./subscribe-form-9.js');
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var subscribeForm9 = require('./subscribe-form-9.js');
+
+
+/**
+ *  Add editions panel behaves as expected
+ *	- subscribe to Insidehook and go to member services
+ *	- locate all editions in add-editions panel
+ *	- update button will not proceed without selecting an edtion-checkbox
+ *	- subscribe to remaining editions
+ *	- when all 5 editions are added, a new form is displayed
+ */
 exports.editionsPanel = function(driver, formPosition) {
 
 	// subscribe to Insidehook and go to member services
 	var serviceElements = subscribeForm9.availableServices(driver, formPosition);
 	// [editionsTab, unsubTab, inviteTab]
 
-	// elements
+	// locate all editions in add-editions panel
   var editionsTab = serviceElements[0];
 	var nationEdition = driver.findElement(webdriver.By.css("#subs-1"));
 	var nyEdition = driver.findElement(webdriver.By.css("#subs-2"));

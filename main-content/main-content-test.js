@@ -1,16 +1,16 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    mainContent1 = require('./main-content-1.js'),
+    driver;
+
+//  Import Files
+var mainContent1 = require('./main-content-1.js'),
     mainContent2 = require('./main-content-2.js'),
     mainContent3 = require('./main-content-3.js'),
     mainContent4 = require('./main-content-4.js'),
-    mainContent5 = require('./main-content-5.js'),
-    driver;
+    mainContent5 = require('./main-content-5.js');
 
 
 test.before(function() {
@@ -36,8 +36,8 @@ test.describe('Main Content', function() {
   });
   
   // Test Cases
-  test.it('title and social icons appear as expected', function() {
-    mainContent1.titleAndSocial(driver);
+  test.it('header and social icons appear as expected', function() {
+    mainContent1.headerAndSocial(driver);
   });
   test.it('image and article body appear as expected', function() {
     mainContent2.imageAndBody(driver);

@@ -1,4 +1,6 @@
+//	Import Modules
 var webdriver = require('selenium-webdriver');
+
 
 exports.getActiveSlide = function(driver) {
 

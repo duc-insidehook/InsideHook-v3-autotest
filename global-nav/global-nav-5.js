@@ -1,8 +1,15 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 chai.use(require('chai-as-promised'));
 
+
+/**
+ *  Search magnifying glass toggles search overlay
+ */
 exports.searchGlass = function(driver) {
   
   var searchGlass = driver.findElement(webdriver.By.css(".search-nav a"));

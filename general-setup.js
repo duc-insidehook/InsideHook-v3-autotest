@@ -15,7 +15,7 @@ exports.individualTestTimeout = function() {
 	return 60000; // ms
 }
 
-exports.pageLoadTime = function(driver) {
+exports.pageLoadTime = function() {
 	// wait till page loads its last element
 	return 5000; // ms
 }

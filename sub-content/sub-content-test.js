@@ -1,19 +1,19 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    subContent1 = require('./sub-content-1.js'),
+    driver;
+
+//  Import Files
+var subContent1 = require('./sub-content-1.js'),
     subContent2 = require('./sub-content-2.js'),
     subContent3 = require('./sub-content-3.js'),
     subContent4 = require('./sub-content-4.js'),
     subContent5 = require('./sub-content-5.js'),
     subContent6 = require('./sub-content-6.js'),
     subContent7 = require('./sub-content-7.js'),
-    subContent8 = require('./sub-content-8.js'),
-    driver;
+    subContent8 = require('./sub-content-8.js');
 
 
 test.before(function() {
@@ -47,7 +47,7 @@ test.describe('Content Feed', function() {
   test.it('items click through to appropriate destination', function() {
     subContent3.clickContentFeed(driver);
   });
-  test.it('more articles appear with h3 header', function() {
+  test.it('featured and more articles appear with h3 header "GO ON, KEEP READING"', function() {
     subContent4.moreArticles(driver);
   });
   test.it('featured article clicks through to appropriate destination', function() {

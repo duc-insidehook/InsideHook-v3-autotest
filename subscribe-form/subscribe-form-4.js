@@ -1,12 +1,25 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect,
-    subscribeForm3 = require('./subscribe-form-3');
+    testEmail = 'valid-email@insidehook.com';
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var subscribeForm3 = require('./subscribe-form-3');
+
+
+/**
+ *  Subscribe form validates input and provide feedback
+ *	- retrieve form elements
+ *	- test with invalid email
+ *	- test with valid email, but unchecked terms and conditionns
+ */
 exports.invalidInput = function(driver, formPosition) {
 
-	// open Subscribe Form and get form elements
+	// retrieve form elements
 	var formElements = subscribeForm3.displayForm(driver, formPosition);
 	// [description, emailInput, zipInput, joinButton, termsAndCons, emailError, termsError]
 	var emailInput = formElements[1];
@@ -22,7 +35,7 @@ exports.invalidInput = function(driver, formPosition) {
 
 	// test with valid email, but unchecked terms and conditionns
 	emailInput.clear();
-	emailInput.sendKeys("valid-email@insidehook.com");
+	emailInput.sendKeys(testEmail);
 	termsAndCons.click();
 	joinButton.submit();
 	driver.wait(webdriver.until.elementIsNotVisible(emailError), 1000);

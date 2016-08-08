@@ -1,16 +1,16 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    largeCarousel1 = require('./large-carousel-1.js'),
+    driver;
+
+//  Import Files
+var largeCarousel1 = require('./large-carousel-1.js'),
     largeCarousel2 = require('./large-carousel-2.js'),
     largeCarousel3 = require('./large-carousel-3.js'),
     largeCarousel4 = require('./large-carousel-4.js'),
-    largeCarousel5 = require('./large-carousel-5.js'),
-    driver;
+    largeCarousel5 = require('./large-carousel-5.js');
 
 
 test.before(function() {

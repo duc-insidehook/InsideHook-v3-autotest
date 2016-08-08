@@ -1,22 +1,36 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    subscribeForm9 = require('./subscribe-form-9.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
     
+// Prerequisite Test
+var	subscribeForm9 = require('./subscribe-form-9.js');
+
+
+/**
+ *  Invite friends panel behaves as expected
+ *	- subscribe to Insidehook and go to member services
+ *	- locate all social icons
+ *	- check url of social icons
+ *	- facebook icon links to "Post to Facebook"
+ *	- twitter icon links to "Post to Twitter"
+ */
 exports.invitePanel = function(driver, formPosition) {
 
 	// subscribe to Insidehook and go to member services
 	var serviceElements = subscribeForm9.availableServices(driver, formPosition);
 	// [editionsTab, unsubTab, inviteTab]
 
-	// elements
+	// locate all social icons
   var inviteTab = serviceElements[2];
 	var fbIcon = driver.findElement(webdriver.By.css("#panelInvite li:nth-child(1) a"));
 	var twitIcon = driver.findElement(webdriver.By.css("#panelInvite li:nth-child(2) a"));
 	var unknownIcon = driver.findElement(webdriver.By.css("#panelInvite li:nth-child(3) a"));
 
-	// check url
+	// check url of social icons
 	inviteTab.click();
 	driver.wait(webdriver.until.elementIsVisible(fbIcon), 5000);
 

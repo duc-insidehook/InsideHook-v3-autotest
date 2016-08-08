@@ -1,19 +1,29 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    subContent4 = require('./sub-content-4.js');
-    
+    expect = chai.expect;
+
+// Prerequisite Test
+subContent4 = require('./sub-content-4.js');
+
+
+/**
+ *  Clicking More From InsideHook button loads 6 more items for the selected tab
+ *	- click More button and expect 12 articles
+ */
 exports.clickMore = function(driver) {
 
 	var content = subContent4.moreArticles(driver);
 	var grid = content[2];
 	var moreButton = driver.findElement(webdriver.By.css("#loadArtMedia"));
 	
-	// 12 articles after clicking More button
+	// click More button and expect 12 articles
 	moreButton.sendKeys(webdriver.Key.ESCAPE);	// need for firefox, optional for chrome	
 	moreButton.click();
-	// wait until button text no longer show loading
-	// letter E appears in both other cases ('MORE FROM INSIDEHOOK' and 'THIS IS THE END')
+	
+	// button can display 'MORE FROM INSIDEHOOK', 'LOADING', or 'THIS IS THE END'
 	driver.wait(webdriver.until.elementTextContains(moreButton, 'E'), 5000);
 
 	var articles = grid.findElements(webdriver.By.css("article"));

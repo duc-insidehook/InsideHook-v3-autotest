@@ -1,8 +1,16 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+
+/**
+ *  Image and article body appear as expected
+ *  - retrieve all body contents and return in an array format
+ */
 exports.imageAndBody = function(driver) {
 
   var image = driver.findElement(webdriver.By.css(".allow-overlay.art-head"));
@@ -17,8 +25,8 @@ exports.imageAndBody = function(driver) {
   var share = body.findElement(webdriver.By.css(".art-share"));
   var znetBlock = body.findElement(webdriver.By.css(".znet-block"));
 
-  var bodyElements = [socialStick, tags, share, znetBlock];
+  var bodyContents = [socialStick, tags, share, znetBlock];
 
-  return bodyElements;
+  return bodyContents;
 
 }

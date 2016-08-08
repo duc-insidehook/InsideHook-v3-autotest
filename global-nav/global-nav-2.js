@@ -1,13 +1,22 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 
+
+/**
+ *  category links click through to appropriate category pages
+ *  - open of one the three main categories
+ *  - open What-To-Buy / Wheels
+ */
 exports.categoryLinks = function(driver) {
 
   var categories = ["WHERE TO GO", "WHAT TO BUY", "HOW TO LIVE"];
   var index = Math.floor(Math.random() * categories.length);
 
-  // test one of the three main categories
+  // open of one the three main categories
   var testCategory = driver.findElement(webdriver.By.linkText(categories[index]));
   testCategory.getAttribute('href').then(function(testUrl) {
     testCategory.click();
@@ -17,7 +26,7 @@ exports.categoryLinks = function(driver) {
     });
   });
   
-  // test What To Buy / Wheels
+  // open What-To-Buy / Wheels
   var whatToBuy = driver.findElement(webdriver.By.linkText("WHAT TO BUY"));
   driver.actions().mouseMove(whatToBuy).perform(); 
   driver.sleep(1000);

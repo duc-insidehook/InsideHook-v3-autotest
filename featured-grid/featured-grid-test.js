@@ -1,22 +1,22 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
-    rawTemplate = webdriverSetup.rawTemplate(),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    featuredGrid1 = require('./featured-grid-1.js'),
+    driver, rawTemplate;
+
+//  Import Files
+var featuredGrid1 = require('./featured-grid-1.js'),
     featuredGrid2 = require('./featured-grid-2.js'),
     featuredGrid3 = require('./featured-grid-3.js'),
     featuredGrid4 = require('./featured-grid-4.js'),
-    featuredGrid5 = require('./featured-grid-5.js'),
-    driver;
+    featuredGrid5 = require('./featured-grid-5.js');
 
 
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
   driver = webdriverSetup.loadDriver();
+  rawTemplate = webdriverSetup.rawTemplate(),
   driver.getWindowHandle();
 });
 

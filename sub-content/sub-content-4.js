@@ -1,8 +1,18 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+
+/**
+ *  Featured and more articles appear with h3 header "GO ON, KEEP READING"
+ *	- check header text
+ *	- check feature article's image and title
+ *	- check grid articles' date, hour, edition, image, and title
+ */
 exports.moreArticles = function(driver) {
 
 	driver.wait(webdriver.until.elementLocated(webdriver.By.css(".flexible-content-grid.art-grid-feed")), 10000);
@@ -12,7 +22,7 @@ exports.moreArticles = function(driver) {
 	var featured = grid.findElement(webdriver.By.css(".featured-v2"));
 	var articles = grid.findElements(webdriver.By.css("article"));
 
-	// check header
+	// check header text
 	expect(h3.getText()).to.eventually.equal("GO ON, KEEP READING:");
 
 	// check feature article
@@ -24,7 +34,7 @@ exports.moreArticles = function(driver) {
 
 	// check grid articles
 	articles.then(function(articles) {
-		// variables
+		
 		var titleUrl = new Array(),
 				titleIndex = 0;
 

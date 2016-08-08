@@ -1,16 +1,16 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    contentFeed1 = require('./content-feed-1.js'),
+    driver;
+
+//  Import Files
+var contentFeed1 = require('./content-feed-1.js'),
     contentFeed2 = require('./content-feed-2.js'),
     contentFeed3 = require('./content-feed-3.js'),
     contentFeed4 = require('./content-feed-4.js'),
-    contentFeed5 = require('./content-feed-5.js'),
-    driver;
+    contentFeed5 = require('./content-feed-5.js');
 
 
 test.before(function() {

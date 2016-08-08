@@ -1,13 +1,13 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
  var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    trendingTags1 = require('./trending-tags-1.js'),
-    trendingTags2 = require('./trending-tags-2.js'),
     driver;
+
+//  Import Files
+var trendingTags1 = require('./trending-tags-1.js'),
+    trendingTags2 = require('./trending-tags-2.js');
 
 
 test.before(function() {

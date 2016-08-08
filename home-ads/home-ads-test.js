@@ -1,15 +1,15 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    ads1 = require('./home-ads-1.js'),
+    driver;
+
+//  Import Files
+var ads1 = require('./home-ads-1.js'),
     ads2 = require('./home-ads-2.js'),
     ads3 = require('./home-ads-3.js'),
-    ads4 = require('./home-ads-4.js'),
-    driver;
+    ads4 = require('./home-ads-4.js');
 
 
 test.before(function() {
@@ -49,4 +49,3 @@ test.describe('Home Ads', function() {
   });
 
 });
-

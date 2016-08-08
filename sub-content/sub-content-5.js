@@ -1,9 +1,18 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    subContent4 = require('./sub-content-4.js');
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+// Prerequisite Test
+var	subContent4 = require('./sub-content-4.js');
+
+
+/**
+ *  Featured article clicks through to appropriate destination
+ */
 exports.clickFeatured = function(driver) {
 
 	var content = subContent4.moreArticles(driver);

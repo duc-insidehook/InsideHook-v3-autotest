@@ -1,16 +1,31 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
-    subscribeForm9 = require('./subscribe-form-9.js');
 chai.use(require('chai-as-promised'));
+
+// Prerequisite Test
+var	subscribeForm9 = require('./subscribe-form-9.js');
     
+
+/**
+ *  Unsubscribe panel behaves as expected
+ *	- subscribe to Insidehook and go to member services
+ *	- locate all editions in unsub panel
+ *	- unsubscribe to sanFran and Chicago editions
+ *	- expect sanFran and Chicago editions to disappear in unsub panel
+ *	- unsubscribe to the remaining editions
+ *	- expect unmember modal to pop up and disappear after a short time, then homepage is opened
+ */
 exports.unsubPanel = function(driver, formPosition) {
 
 	// subscribe to Insidehook and go to member services
 	var serviceElements = subscribeForm9.availableServices(driver, formPosition);
 	// [editionsTab, unsubTab, inviteTab]
 
-	// elements
+	// locate all editions in unsub panel
 	var unsubTab = serviceElements[1];
 	var nationEdition = driver.findElement(webdriver.By.css("#unsubs-1"));
 	var nyEdition = driver.findElement(webdriver.By.css("#unsubs-2"));
@@ -19,8 +34,7 @@ exports.unsubPanel = function(driver, formPosition) {
 	var chicagoEdition = driver.findElement(webdriver.By.css("#unsubs-5"));
 	var unsubsUpdate = driver.findElement(webdriver.By.css("#editionUnsubForm button"));
 
-
-	// unsubscribe to San Francisco and Chicago editions
+	// unsubscribe to SanFran and Chicago editions
 	unsubTab.click();
 	driver.wait(webdriver.until.elementIsVisible(unsubsUpdate), 5000);
 
@@ -33,7 +47,7 @@ exports.unsubPanel = function(driver, formPosition) {
 	unsubsUpdate.submit();
 	driver.wait(webdriver.until.elementIsNotVisible(unsubsUpdate), 5000);
 	
-	// expect sanFrancisco and Chicago edigtions to disappear in unsub panel
+	// expect sanFran and Chicago editions to disappear in unsub panel
 	unsubTab.click();
 	driver.wait(webdriver.until.elementIsVisible(unsubsUpdate), 5000);
 
@@ -56,14 +70,11 @@ exports.unsubPanel = function(driver, formPosition) {
 	});
 	unsubsUpdate.submit();
 
-	// wait until unmember modal appears
+	// expect unmember modal to pop up and disappear after a short time, then homepage is opened
 	driver.wait(webdriver.until.elementLocated(webdriver.By.css("#modal-unmember")), 5000);
-	
-	// expect unmember modal to disappear after a short time
 	var modalUnmember = driver.findElement(webdriver.By.css("#modal-unmember"));
+	
 	driver.wait(webdriver.until.stalenessOf(modalUnmember), 10000);
-
-	// expect home page is opened
 	expect(driver.getCurrentUrl()).to.eventually.equal("http://www-stage.insidehook.com/");
 
 }

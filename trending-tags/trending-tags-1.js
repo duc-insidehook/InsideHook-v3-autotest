@@ -1,8 +1,15 @@
+/**
+ *  Import Modules
+ */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
     expect = chai.expect;
 chai.use(require('chai-as-promised'));
-    
+
+
+/**
+ *  Four trending tags display
+ */
 exports.tagsDisplay = function(driver) {
 
 	var trendingTags = driver.findElement(webdriver.By.css(".global-trending"));

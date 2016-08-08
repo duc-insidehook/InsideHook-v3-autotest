@@ -1,13 +1,13 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    subcatHeader1 = require('./subcat-header-1.js'),
-    subcatHeader2 = require('./subcat-header-2.js'),
     driver;
+
+//  Import Files
+var subcatHeader1 = require('./subcat-header-1.js'),
+    subcatHeader2 = require('./subcat-header-2.js');
 
 
 test.before(function() {
@@ -35,7 +35,7 @@ test.describe('Content Feed', function() {
   test.it('section has one h1 header and sub-categories', function() {
     subcatHeader1.appear(driver);
   });
-  test.it('click through to appropriate destination', function() {
+  test.it('sub-categories click through to appropriate destination', function() {
     subcatHeader2.clickThrough(driver);
   });
   

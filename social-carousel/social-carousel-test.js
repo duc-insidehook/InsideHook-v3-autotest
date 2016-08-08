@@ -1,17 +1,17 @@
-/**
- *  Import Modules and Files
- */
+//  Import Modules
 var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    socialCarousel1 = require('./social-carousel-1.js'),
+    driver, rawTemplate;
+
+//  Import Files
+var socialCarousel1 = require('./social-carousel-1.js'),
     socialCarousel2 = require('./social-carousel-2.js'),
     socialCarousel3 = require('./social-carousel-3.js'),
     socialCarousel4 = require('./social-carousel-4.js'),
     socialCarousel5 = require('./social-carousel-5.js'),
-    socialCarousel6 = require('./social-carousel-6.js'),
-    driver, rawTemplate;
+    socialCarousel6 = require('./social-carousel-6.js');
 
 
 test.before(function() {
