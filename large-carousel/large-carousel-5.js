@@ -26,13 +26,15 @@ exports.slickArrows = function(driver) {
 		slickPrev.click(); driver.sleep(1000);
 		freezeTheSlide(driver);
 		getSlideIndex(driver).then(function(currentIndex) {
-			expect(currentIndex).to.not.equal(oldIndex);
+			expect(currentIndex, "cannot click prev").
+				to.not.equal(oldIndex);
 			
 			// click next and expect current slide's index to equal initial slide's index
 			slickNext.click(); driver.sleep(1000);
 			freezeTheSlide(driver);
 			getSlideIndex(driver).then(function(currentIndex) {
-				expect(currentIndex).to.equal(oldIndex);
+				expect(currentIndex, "cannot click next").
+					to.equal(oldIndex);
 			});
 		});
 	});

@@ -12,12 +12,12 @@ subContent1 = require('./sub-content-1.js');
 
 /**
  *  Items click through to appropriate destination
- *  - click on the latest tab and expect 7 articles initially
+ *  - click on the latest tab and expect 5 articles initially
  *  - click on one of the lastest 3 articles
  */
 exports.clickContentFeed = function(driver) {
 
-	// click on the latest tab and expect 7 articles initially
+	// click on the latest tab and expect 5 articles initially
 	var feedLatest = subContent1.fiveItemsLatest(driver);
 
 	var feedItems = feedLatest.findElements(webdriver.By.css("h4"));
@@ -30,16 +30,21 @@ exports.clickContentFeed = function(driver) {
 			articleLink.sendKeys(webdriver.Key.ESCAPE);	// need for firefox, optional for chrome	
 			articleLink.click();
 			
+			// article within Insidehook domain
 			if (linkUrl.includes("insidehook")) {
 				driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
-				expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+				expect(driver.getCurrentUrl() "wrong destination\n").
+					to.eventually.equal(linkUrl);
 			} 
-			else { // if power by another party, link will be opened in a new tab
-				driver.getAllWindowHandles().then(function(tabs) {
+			// article power by another party - required opening new tab
+			else {
+				expect(tabs.length, "item cannot be clicked/ will not open").
+						to.equal(2);
 
 					expect(tabs.length).to.equal(2);
       		driver.switchTo().window(tabs[1]);
-      		expect(driver.getCurrentUrl()).to.eventually.have.string(linkUrl);
+      		expect(driver.getCurrentUrl(), "wrong destination\n").
+      			to.eventually.have.string(linkUrl);
       		driver.close(); driver.switchTo().window(tabs[0]);
       	});
 			}

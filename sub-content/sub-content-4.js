@@ -29,7 +29,8 @@ exports.moreArticles = function(driver) {
 	var imageUrl = featured.findElement(webdriver.By.css(".th a")).getAttribute('href');
 	imageUrl.then(function(imageUrl) {
 		var titleUrl = featured.findElement(webdriver.By.css(".panel a")).getAttribute('href');
-		expect(titleUrl).to.eventually.equal(imageUrl);
+		expect(titleUrl, "image's url and title's url do not match\n").
+			to.eventually.equal(imageUrl);
 	});
 
 	// check grid articles
@@ -49,7 +50,8 @@ exports.moreArticles = function(driver) {
 			var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
 			titleUrl[i] = articles[i].findElement(webdriver.By.css(".panel a")).getAttribute('href');
 			imageUrl.then(function(imageUrl) {
-				expect(titleUrl[titleIndex++]).to.eventually.equal(imageUrl);
+				expect(titleUrl[titleIndex++], "image's url and title's url do not match\n").
+					to.eventually.equal(imageUrl);
 			});
 		}
 	});

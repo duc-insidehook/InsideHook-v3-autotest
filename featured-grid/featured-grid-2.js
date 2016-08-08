@@ -30,7 +30,7 @@ exports.featuredItemClick = function(driver, rawTemplate) {
 			featuredTitle.click();
 
 			driver.wait(webdriver.until.stalenessOf(feature), 10000);
-			expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+			expect(driver.getCurrentUrl(), "title clicks to wrong desitnation\n").to.eventually.equal(linkUrl);
 		});
 	}
 
@@ -50,7 +50,7 @@ exports.featuredItemClick = function(driver, rawTemplate) {
 	  			click().perform(); 
 
 	  	driver.wait(webdriver.until.stalenessOf(feature), 10000);
-	  	expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+	  	expect(driver.getCurrentUrl(), "image clicks to wrong destination\n").to.eventually.equal(linkUrl);
 		});
 	}
 

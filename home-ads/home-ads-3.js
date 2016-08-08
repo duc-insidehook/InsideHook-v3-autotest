@@ -20,8 +20,10 @@ exports.railAdsAppear = function(driver) {
 	
 	var frame = ads.findElement(webdriver.By.tagName("iframe"));
 	frame.getSize().then(function(size) {
-		expect(size.height).to.equal(600);
-		expect(size.width).to.equal(300);
+		expect(size.height, "height is not 600").
+			to.equal(600);
+		expect(size.width, "wdith is not 300").
+			to.equal(300);
 	});
 
 	return frame;

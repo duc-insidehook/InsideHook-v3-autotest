@@ -26,7 +26,8 @@ exports.socialIcons = function(driver, rawTemplate) {
   	var socialSection = socialCarousel1.appear(driver);
     var socialIcons = socialSection.findElements(webdriver.By.css(".brand-social-buttons .button"));
     socialIcons.then(function(socialIcons) {
-      expect(socialIcons.length).to.equal(3);
+      expect(socialIcons.length, "section does not have 3 social icons").
+        to.equal(3);
       
       // social icons are expected to be listed in this order: fb, gram, twitter
       var fbIcon = socialIcons[0];
@@ -42,7 +43,8 @@ exports.socialIcons = function(driver, rawTemplate) {
       fbIcon.sendKeys(webdriver.Key.ESCAPE); // need for firefox, optional for chrome  
       fbIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
-        expect(tabs.length).to.equal(2);
+        expect(tabs.length, "fbIcon cannot be clicked/ will not opened").
+          to.equal(2);
 
         driver.switchTo().window(tabs[1]);
         expect(driver.getCurrentUrl()).to.eventually.equal("https://www.facebook.com/InsideHook");
@@ -53,7 +55,8 @@ exports.socialIcons = function(driver, rawTemplate) {
       // Test gram Icon
       gramIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
-        expect(tabs.length).to.equal(2);
+        expect(tabs.length, "gramIcon cannot be clicked/ will not opened").
+          to.equal(2);
 
         driver.switchTo().window(tabs[1]);
         expect(driver.getCurrentUrl()).to.eventually.equal("https://www.instagram.com/insidehook/");
@@ -64,7 +67,8 @@ exports.socialIcons = function(driver, rawTemplate) {
       // Test twitter Icon
       twitIcon.click(); driver.sleep(1000);
       driver.getAllWindowHandles().then(function(tabs) {
-        expect(tabs.length).to.equal(2);
+        expect(tabs.length, "twitIcon cannot be clicked/ will not opened").
+          to.equal(2);
 
         driver.switchTo().window(tabs[1]);
         expect(driver.getCurrentUrl()).to.eventually.equal("https://twitter.com/InsideHook");

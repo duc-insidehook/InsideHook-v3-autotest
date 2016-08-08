@@ -50,21 +50,25 @@ var socialVersion = function(socialSection) {
   var itemsLink = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide a"));
 
   itemsLink.then(function(items) {
-    expect(items.length).to.equal(18); // 10 items + 8 clones
-      var totalUrl = 0, fbUrl = 0, gramUrl = 0;
+    expect(items.length, "carousel does not have 10 items").
+      to.equal(18); // 10 items + 8 clones
+    
+    var totalUrl = 0, fbUrl = 0, gramUrl = 0;
 
-      // skip first annd last four clones
-      for (i=4; i<(items.length-4); i++) {
-        items[i].getAttribute('href').then(function(text) {
-          totalUrl++;
-          if( text.includes('instagram.com')) {gramUrl++;}
-          if( text.includes('facebook.com')) {fbUrl++;}
-          if( totalUrl==10 ) {
-            expect(gramUrl).to.equal(5);
-            expect(fbUrl).to.equal(5);
-          }
-        });
-      }
+    // skip first annd last four clones
+    for (i=4; i<(items.length-4); i++) {
+      items[i].getAttribute('href').then(function(text) {
+        totalUrl++;
+        if( text.includes('instagram.com')) {gramUrl++;}
+        if( text.includes('facebook.com')) {fbUrl++;}
+        if( totalUrl==10 ) {
+          expect(gramUrl, "cannot find 5 Instagram items").
+            to.equal(5);
+          expect(fbUrl, "cannot find 5 Facebook items").
+            to.equal(5);
+        }
+      });
+    }
   });
 }
 
@@ -92,7 +96,8 @@ var subCatVersion = function(driver, socialSection) {
 
           if( subcatUrl!=null) {
             carouselUrl[carouselIndex++].then(function(carouselUrl) {
-              expect(subcatUrl).to.equal(carouselUrl);
+              expect(subcatUrl, "subcat from carousel do not match with subcat form header").
+                to.equal(carouselUrl);
             });
           }
         });
@@ -126,7 +131,8 @@ var goodsVersion = function(socialSection) {
       var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
       titleUrl[i] = articles[i].findElement(webdriver.By.css("h3 a")).getAttribute('href');
       imageUrl.then(function(imageUrl) {
-        expect(titleUrl[titleIndex++]).to.eventually.equal(imageUrl);
+        expect(titleUrl[titleIndex++], "title and image don't have the same url").
+          to.eventually.equal(imageUrl);
       });
     }
 

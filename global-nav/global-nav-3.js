@@ -41,9 +41,11 @@ exports.citiesLink = function(driver) {
       categories.then(function(categories) {
         var cities = categories[3].findElement(webdriver.By.tagName("a"));
         if( currentCity == 'CITIES') {
-          expect(cities.getText()).to.eventually.equal('NEW YORK');
+          expect(cities.getText(), "cannot change from nation edition to NY edtion").
+            to.eventually.equal('NEW YORK');
         } else {
-          expect(cities.getText()).to.eventually.equal('CITIES');
+          expect(cities.getText(), "cannot change from a city edition to nation edition").
+            to.eventually.equal('CITIES');
         }
       });
     });

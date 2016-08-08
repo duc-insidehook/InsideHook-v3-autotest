@@ -18,8 +18,10 @@ exports.bottomAdsAppear = function(driver) {
 
 	var frame = ads.findElement(webdriver.By.tagName("iframe"));
 	frame.getSize().then(function(size) {
-		expect(size.height).to.equal(90);
-		expect(size.width).to.equal(728);
+		expect(size.height, "heigh is not 90").
+			to.equal(90);
+		expect(size.width, "width is not 728").
+			to.equal(728);
 	});
 
 	return frame;

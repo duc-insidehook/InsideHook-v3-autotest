@@ -27,13 +27,14 @@ exports.ad = function(driver) {
 	var visibleAd;
 	var ads = driver.findElements(webdriver.By.css(".ad-feat"));
 	ads.then(function(ads) {
-		expect(ads.length).to.equal(2);
+		expect(ads.length, "cannot find 2 ads in featured grid").
+			to.equal(2);
 
 		ads[0].isDisplayed().then(function(firstAdIsDisplayed) {
 			if( firstAdIsDisplayed ) {
 				visibleAd = 0;
 			} else {
-				expect(ads[1].isDisplayed).to.eventually.equal(true);
+				expect(ads[1].isDisplayed, "ads are not displaying").to.eventually.equal(true);
 				visibleAd = 1;
 			}
 		});
@@ -43,8 +44,8 @@ exports.ad = function(driver) {
 		ads.then(function(ads) {
 			ads[visibleAd].findElement(webdriver.By.css("iframe")).then(function(adFrame) {
 				adFrame.getSize().then(function(frame) {
-					expect(frame.width).to.equal(300);
-					expect(frame.height).to.equal(250);
+					expect(frame.width, "width is not 300").to.equal(300);
+					expect(frame.height, "height is not 250").to.equal(250);
 				});	
 			});
 		});

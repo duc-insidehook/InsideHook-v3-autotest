@@ -36,13 +36,19 @@ exports.displayForm = function(driver, formPosition) {
 									termsAndCons, emailError, termsError];
 
 	// check form elements' visibility
-	expect(description.isDisplayed()).to.eventually.equal(true);
-	expect(emailInput.isDisplayed()).to.eventually.equal(true);
-	expect(joinButton.isDisplayed()).to.eventually.equal(true);
-	expect(termsAndCons.isDisplayed()).to.eventually.equal(true);
-	expect(termsAndCons.isSelected()).to.eventually.equal(true);
+	expect(description.isDisplayed(), "no description").
+		to.eventually.equal(true);
+	expect(emailInput.isDisplayed(), "no email input").
+		to.eventually.equal(true);
+	expect(joinButton.isDisplayed(), "no join button").
+		to.eventually.equal(true);
+	expect(termsAndCons.isDisplayed(), "no terms and conditions").
+		to.eventually.equal(true);
+	expect(termsAndCons.isSelected(), "terms and conditions not checked by default").
+		to.eventually.equal(true);
 	if (formPosition == 'top' || formPosition == 'bot')
-		expect(zipInput.isDisplayed()).to.eventually.equal(true);
+		expect(zipInput.isDisplayed(), "no zip code input").
+		to.eventually.equal(true);
 
 	// check form elements' types
 	expect(emailInput.getTagName()).to.eventually.equal('input');

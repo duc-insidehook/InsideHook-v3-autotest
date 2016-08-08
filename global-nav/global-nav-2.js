@@ -22,7 +22,8 @@ exports.categoryLinks = function(driver) {
     testCategory.click();
     driver.wait(webdriver.until.stalenessOf(testCategory), 10000);
     driver.getCurrentUrl().then(function(currentUrl) {
-      expect(currentUrl).to.have.string(testUrl);  
+      expect(currentUrl, "main category clicks to wrong destination").
+        to.have.string(testUrl);  
     });
   });
   
@@ -34,7 +35,8 @@ exports.categoryLinks = function(driver) {
   driver.wait(webdriver.until.stalenessOf(whatToBuy), 10000);
   
   driver.getCurrentUrl().then(function(url) {
-    expect(url).to.have.string("wheels");  
+    expect(url, "sub category clicks to wrong destination").
+      to.have.string("wheels");  
   });  
   
 };

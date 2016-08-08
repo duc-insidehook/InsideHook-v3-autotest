@@ -20,7 +20,8 @@ exports.socialButtons = function(driver) {
    */
   var socialIcons = driver.findElements(webdriver.By.css(".global-navigation.top-bar .right.show-for-medium-up .round"));
   socialIcons.then(function(socialIcons) {
-    expect(socialIcons.length).to.equal(3);
+    expect(socialIcons.length, "global-nav does not have 3 social icons").
+      to.equal(3);
     
     var fbIcon = socialIcons[0];
     var gramIcon = socialIcons[1];
@@ -34,7 +35,8 @@ exports.socialButtons = function(driver) {
     // click fb icon
     fbIcon.click();
     driver.getAllWindowHandles().then(function(tabs) {
-      expect(tabs.length).to.equal(2);
+      expect(tabs.length, "fbIcon cannot be clicked/ will not opened").
+        to.equal(2);
 
       driver.switchTo().window(tabs[1]);
       expect(driver.getCurrentUrl()).to.eventually.equal("https://www.facebook.com/InsideHook");
@@ -45,7 +47,8 @@ exports.socialButtons = function(driver) {
     // click gram Icon
     gramIcon.click();
     driver.getAllWindowHandles().then(function(tabs) {
-      expect(tabs.length).to.equal(2);
+      expect(tabs.length, "gramIcon cannot be clicked/ will not opened").
+        to.equal(2);
 
       driver.switchTo().window(tabs[1]);
       expect(driver.getCurrentUrl()).to.eventually.equal("https://www.instagram.com/insidehook/");
@@ -56,7 +59,8 @@ exports.socialButtons = function(driver) {
     // click twitter Icon
     twitIcon.click();
     driver.getAllWindowHandles().then(function(tabs) {
-      expect(tabs.length).to.equal(2);
+      expect(tabs.length, "twitIcon cannot be clicked/ will not opened").
+        to.equal(2);
 
       driver.switchTo().window(tabs[1]);
       expect(driver.getCurrentUrl()).to.eventually.equal("https://twitter.com/InsideHook");

@@ -44,10 +44,10 @@ var socialVersion = function(driver, socialSection) {
    *  - test opening a random item
    *  - expect article from fb/instagram
    */
-
   var itemLinks = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide.slick-active a"));
   itemLinks.then(function(itemLinks) {
-    expect(itemLinks.length).to.equal(4);
+    expect(itemLinks.length, "number of displaying item is not 4").
+      to.equal(4);
 
     // test opening a random item
     var index = Math.floor(Math.random() * itemLinks.length);
@@ -56,7 +56,8 @@ var socialVersion = function(driver, socialSection) {
 
       // expect article from fb/instagram
       driver.getAllWindowHandles().then(function(tabs) {
-        expect(tabs.length).to.equal(2);
+        expect(tabs.length, "item cannot be clicked/ will not open").
+          to.equal(2);
 
         driver.switchTo().window(tabs[1]);
         driver.getTitle().then(function(title) {
@@ -65,7 +66,8 @@ var socialVersion = function(driver, socialSection) {
           } else if (title.includes("Instagram")) {
             expect(title).to.have.string("InsideHook on Instagram");
           } else {
-            expect(title, "article is neither Facebook nor Instagram").to.equal(null);
+            expect(title, "article is neither Facebook nor Instagram\n").
+              to.equal(null);
           }
         });
         driver.close(); driver.switchTo().window(tabs[0]);
@@ -83,7 +85,8 @@ var subCatVersion = function(driver, socialSection) {
    */
   var itemLinks = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide.slick-active a"));
   itemLinks.then(function(itemLinks) {
-    expect(itemLinks.length).to.equal(4);
+    expect(itemLinks.length, "number of displaying item is not 4").
+      to.equal(4);
 
     // test opening a random item
     var index = Math.floor(Math.random() * itemLinks.length);
@@ -92,7 +95,8 @@ var subCatVersion = function(driver, socialSection) {
       itemLinks[index].click();
       driver.wait(webdriver.until.stalenessOf(itemLinks[index]), 10000);
 
-      expect(driver.getCurrentUrl()).to.eventually.equal(itemUrl);
+      expect(driver.getCurrentUrl(), "wrong destination\n").
+        to.eventually.equal(itemUrl);
     });
   });
 }
@@ -108,7 +112,8 @@ var goodsItemVersion = function(driver, socialSection) {
 
   var itemLinks = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide.slick-active .th a"));
   itemLinks.then(function(itemLinks) {
-    expect(itemLinks.length).to.equal(4);
+    expect(itemLinks.length, "number of displaying item is not 4").
+      to.equal(4);
     
     // test opening a random item
     var index = Math.floor(Math.random() * itemLinks.length);
@@ -116,7 +121,8 @@ var goodsItemVersion = function(driver, socialSection) {
 
     // print item's page title
     driver.getAllWindowHandles().then(function(tabs) {
-      expect(tabs.length).to.equal(2);
+      expect(tabs.length, "item cannot be clicked/ will not open").
+        to.equal(2);
 
       driver.switchTo().window(tabs[1]);
       driver.getTitle().then(function(title) {

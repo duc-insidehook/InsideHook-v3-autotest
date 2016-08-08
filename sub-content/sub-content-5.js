@@ -26,7 +26,8 @@ exports.clickFeatured = function(driver) {
 			anchor.click();
 					
 			driver.wait(webdriver.until.stalenessOf(anchor), 10000);
-			expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+			expect(driver.getCurrentUrl(), "featured item clicks to wrong destination\n").
+				to.eventually.equal(linkUrl);
 		});
 	});
 

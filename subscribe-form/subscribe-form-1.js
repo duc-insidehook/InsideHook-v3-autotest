@@ -23,11 +23,13 @@ exports.openForm = function(driver, formPosition) {
     // wait until the sign up form to be loaded, timeout 10s
     driver.wait(webdriver.until.elementLocated(webdriver.By.css(".col-signup.signup")), 10000);
   	var signUpForm = driver.findElement(webdriver.By.css(".col-signup.signup"));
-  	expect(signUpForm.isDisplayed()).to.eventually.equal(true);
+  	expect(signUpForm.isDisplayed(), "right rail sign-up form won't display").
+      to.eventually.equal(true);
   } 
   else if( formPosition == 'bot') {
     var signUpForm = driver.findElement(webdriver.By.css(".global-footer .visible-for-medium-up"));
-    expect(signUpForm.isDisplayed()).to.eventually.equal(true);
+    expect(signUpForm.isDisplayed(), "bottom sign-up form won't display").
+      to.eventually.equal(true);
   } 
   else return null;
 

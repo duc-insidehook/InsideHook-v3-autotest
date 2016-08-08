@@ -28,7 +28,8 @@ exports.gridItemClick = function(driver) {
 			articleLink.click();
 			
 			driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
-			expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+			expect(driver.getCurrentUrl(), "wrong destination\n").
+				to.eventually.equal(linkUrl);
 		});
 	});
 

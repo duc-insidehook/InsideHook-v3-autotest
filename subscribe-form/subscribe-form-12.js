@@ -46,6 +46,9 @@ exports.invitePanel = function(driver, formPosition) {
 	// facebook icon links to "Post to Facebook"
 	fbIcon.click(); driver.sleep(1000);
 	driver.getAllWindowHandles().then(function(tabs) {
+		expect(tabs.length, "fbIcon cannot be clicked/ will not opened").
+    	to.equal(2);
+
 		driver.switchTo().window(tabs[1]);
 		expect(driver.getTitle()).to.eventually.equal('Facebook');
 		driver.close(); driver.switchTo().window(tabs[0]);
@@ -54,6 +57,9 @@ exports.invitePanel = function(driver, formPosition) {
 	// twitter icon links to "Post to Twitter"
 	twitIcon.click(); driver.sleep(1000);
 	driver.getAllWindowHandles().then(function(tabs) {
+		expect(tabs.length, "twitIcon cannot be clicked/ will not opened").
+    	to.equal(2);
+
 		driver.switchTo().window(tabs[1]);
 		expect(driver.getTitle()).to.eventually.equal('Post a Tweet on Twitter');
 		driver.close(); driver.switchTo().window(tabs[0]);

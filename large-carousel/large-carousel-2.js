@@ -32,7 +32,8 @@ exports.imageAndTitle = function(driver) {
 	activeLink.click();
 	driver.wait(webdriver.until.stalenessOf(activeLink), 10000);
 	slideUrl.then(function(slideUrl) {
-		expect(driver.getCurrentUrl()).to.eventually.equal(slideUrl);
+		expect(driver.getCurrentUrl(), "wrong destination\n").
+			to.eventually.equal(slideUrl);
 	});
 
 }

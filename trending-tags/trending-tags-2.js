@@ -34,7 +34,8 @@ exports.tagsClick = function(driver) {
 			
 			tags[testTags].click();
 			driver.wait(webdriver.until.stalenessOf(tags[testTags]), 10000);
-			expect(driver.getCurrentUrl()).to.eventually.equal(tagUrl);
+			expect(driver.getCurrentUrl(), "wrong destination\n").
+				to.eventually.equal(tagUrl);
 		});
 	});
 

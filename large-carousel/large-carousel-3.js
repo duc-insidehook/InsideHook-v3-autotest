@@ -22,13 +22,15 @@ exports.clickAndDrag = function(driver) {
 		driver.actions().dragAndDrop(activeText, {x: 300, y: 0}).perform(); driver.sleep(1000);
 		freezeTheSlide(driver);
 		getSlideIndex(driver).then(function(currentIndex) {
-			expect(currentIndex).to.not.equal(oldIndex);
+			expect(currentIndex, "cannot drag left").
+				to.not.equal(oldIndex);
 			
 			// drag left and expect current slide's index to equal initial slide's index
 			driver.actions().dragAndDrop(activeText, {x: -300, y: 0}).perform(); driver.sleep(1000);
 			freezeTheSlide(driver);
 			getSlideIndex(driver).then(function(currentIndex) {
-				expect(currentIndex).to.equal(oldIndex);
+				expect(currentIndex, "cannot drag right").
+					to.equal(oldIndex);
 			});
 		});
 	});

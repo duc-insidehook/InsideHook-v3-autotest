@@ -25,8 +25,10 @@ exports.itemsFeature = function(driver, rawTemplate) {
     // 300x300 for each item
     for (var i=4; i<(items.length-4); i++) {
       items[i].getSize().then(function(size) {
-        expect(size.height).to.equal(300);
-        expect(size.width).to.equal(300);
+        expect(size.height, "item height is not 300").
+          to.equal(300);
+        expect(size.width, "item width is not 300").
+          to.equal(300);
       });
     }
 

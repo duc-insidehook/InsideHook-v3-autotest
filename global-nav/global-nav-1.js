@@ -17,7 +17,8 @@ exports.insidehookLogo = function(driver) {
   driver.wait(webdriver.until.stalenessOf(logo), 10000);
   driver.getCurrentUrl().then(function(url) {
 
-    expect(url).to.equal("http://www-stage.insidehook.com/");
+    expect(url, "InsideHook logo won't direct to homepage").
+    	to.equal("http://www-stage.insidehook.com/");
   });
 
 };

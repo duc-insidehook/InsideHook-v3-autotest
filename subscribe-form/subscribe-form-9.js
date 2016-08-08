@@ -35,9 +35,12 @@ exports.availableServices = function(driver, formPosition) {
 	 *	- only one should be appear at a time
 	 *	- edition should be the default panel
 	 */
-	expect(editionsPanel.isDisplayed()).to.eventually.equal(true);
-	expect(unsubPanel.isDisplayed()).to.eventually.equal(false);
-	expect(invitePanel.isDisplayed()).to.eventually.equal(false);
+	expect(editionsPanel.isDisplayed(), "add edition panel is not displayed").
+		to.eventually.equal(true);
+	expect(unsubPanel.isDisplayed(), "unsub panel is displayed").
+		to.eventually.equal(false);
+	expect(invitePanel.isDisplayed(), "invite panel is displayed").
+		to.eventually.equal(false);
 
 	return serviceElements;
 }

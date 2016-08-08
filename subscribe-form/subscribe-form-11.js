@@ -52,10 +52,12 @@ exports.unsubPanel = function(driver, formPosition) {
 	driver.wait(webdriver.until.elementIsVisible(unsubsUpdate), 5000);
 
 	sanFranEdition.isDisplayed().then(function(sanFranIsVisible){
-		expect(sanFranIsVisible).to.equal(false);
+		expect(sanFranIsVisible, "sanFran is still displayed in unsub tab").
+			to.equal(false);
 	});
 	chicagoEdition.isDisplayed().then(function(chicagoIsVisible){
-		expect(chicagoIsVisible).to.equal(false);
+		expect(chicagoIsVisible, "Chicago is still displayed in unsub tab").
+			to.equal(false);
 	});
 	
 	// unsubscribe to the remaining editions
@@ -75,6 +77,7 @@ exports.unsubPanel = function(driver, formPosition) {
 	var modalUnmember = driver.findElement(webdriver.By.css("#modal-unmember"));
 	
 	driver.wait(webdriver.until.stalenessOf(modalUnmember), 10000);
-	expect(driver.getCurrentUrl()).to.eventually.equal("http://www-stage.insidehook.com/");
+	expect(driver.getCurrentUrl(), "homepage is not loaded after unsubscribing to all editions").
+		to.eventually.equal("http://www-stage.insidehook.com/");
 
 }

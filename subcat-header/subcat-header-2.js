@@ -33,7 +33,8 @@ exports.clickThrough = function(driver) {
 		subcat[index].getAttribute('href').then(function(linkUrl) {
 			subcat[index].click();
 			driver.wait(webdriver.until.stalenessOf(subcat[index]), 10000);
-			expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+			expect(driver.getCurrentUrl(), "wrong destination\n").
+				to.eventually.equal(linkUrl);
 		});
 		
 	});

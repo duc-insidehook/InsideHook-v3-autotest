@@ -24,7 +24,6 @@ exports.clickContentFeed = function(driver) {
 	var feedItems = feedLatest.findElements(webdriver.By.css("article"));
 	
 	feedItems.then(function(articles) {
-		expect(articles.length).to.be.above(0);
 
 		var titleUrl = new Array(),
 				titleIndex = 0;  // use to loop through titleUrl
@@ -39,7 +38,8 @@ exports.clickContentFeed = function(driver) {
 			var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
 			titleUrl[i] = articles[i].findElement(webdriver.By.css(".panel a")).getAttribute('href');
 			imageUrl.then(function(imageUrl) {
-				expect(titleUrl[titleIndex++]).to.eventually.equal(imageUrl);
+				expect(titleUrl[titleIndex++], "title and image don't have the same url").
+					to.eventually.equal(imageUrl);
 			});
 		}
 		
@@ -53,14 +53,18 @@ exports.clickContentFeed = function(driver) {
 			// article within Insidehook domain
 			if (linkUrl.includes("insidehook")) {
 				driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
-				expect(driver.getCurrentUrl()).to.eventually.equal(linkUrl);
+				expect(driver.getCurrentUrl(), "wrong destination").
+					to.eventually.equal(linkUrl);
 			} 
 			// article power by another party - required opening new tab
 			else { 
 				driver.getAllWindowHandles().then(function(tabs) {
-					expect(tabs.length).to.equal(2);
+					expect(tabs.length, "item cannot be clicked/ will not open").
+						to.equal(2);
+						
       		driver.switchTo().window(tabs[1]);
-      		expect(driver.getCurrentUrl()).to.eventually.have.string(linkUrl);
+      		expect(driver.getCurrentUrl(), "wrong destination").
+      			to.eventually.have.string(linkUrl);
       		driver.close(); driver.switchTo().window(tabs[0]);
       	});
 			}

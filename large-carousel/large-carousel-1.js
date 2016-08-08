@@ -25,13 +25,15 @@ exports.autoAdvance = function(driver) {
 
 		trackItem[0].getAttribute('href').then(function(firstClone) {
 			trackItem[numOfItems-2].getAttribute('href').then(function(lastItem) {
-				expect(firstClone).to.equal(lastItem);
+				expect(firstClone, "first-clone and last-item do not match\n").
+					to.equal(lastItem);
 			});
 		});
 
 		trackItem[1].getAttribute('href').then(function(firstItem) {
 			trackItem[numOfItems-1].getAttribute('href').then(function(lastClone) {
-				expect(firstItem).to.equal(lastClone);
+				expect(firstItem, "first-item and last-clone do not match\n").
+					to.equal(lastClone);
 			});
 		});
 	});
@@ -40,10 +42,11 @@ exports.autoAdvance = function(driver) {
 	var activeLink = largeCarousel0.getActiveSlideUrl(driver);
 	activeLink.getAttribute('href').then(function(oldSlide) {
 		
-		driver.sleep(3500);	// wait 3.5s for the slide to auto advance
+		driver.sleep(3500);
 		var activeLink = largeCarousel0.getActiveSlideUrl(driver);
 		activeLink.getAttribute('href').then(function(newSlide) {
-			expect(newSlide).to.not.equal(oldSlide);
+			expect(newSlide, "carousel does not auto advance after 3s\n").
+				to.not.equal(oldSlide);
 		});
 	});
 

@@ -24,7 +24,9 @@ exports.bottomAdsClick = function(driver) {
 	ads.click();
 	driver.sleep(1000);
 	driver.getAllWindowHandles().then(function(tabs) {
-
+		expect(tabs.length, "ad cannot be clicked/ will not opened").
+    	to.equal(2);
+    	
     driver.switchTo().window(tabs[1]);
 		driver.getTitle().then(function(title) {
 			console.log("\tads redirect to \"" + title + "\"");
