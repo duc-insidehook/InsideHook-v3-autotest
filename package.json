@@ -1,0 +1,11 @@
+{
+  "name": "InsideHook-v3-autotest",
+  "version": "0.0.0",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "minimist": "^1.2.0",
+    "mocha": "^2.5.3",
+    "selenium-webdriver": "^2.53.3"
+  }
+}

@@ -6,10 +6,10 @@ var webdriver = require('selenium-webdriver'),
     driver;
 
 //  Import Files
-var ads1 = require('./home-ads-1.js'),
-    ads2 = require('./home-ads-2.js'),
-    ads3 = require('./home-ads-3.js'),
-    ads4 = require('./home-ads-4.js');
+var ads1 = require('./web-ads-1.js'),
+    ads2 = require('./web-ads-2.js'),
+    ads3 = require('./web-ads-3.js'),
+    ads4 = require('./web-ads-4.js');
 
 
 test.before(function() {
@@ -24,7 +24,7 @@ test.after(function() {
 });
 
 
-test.describe('Home Ads', function() {
+test.describe('Web Ads', function() {
   this.timeout(generalSetup.individualTestTimeout());
 
   test.beforeEach(function() {

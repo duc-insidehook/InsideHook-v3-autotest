@@ -7,26 +7,26 @@ var webdriver = require('selenium-webdriver'),
 chai.use(require('chai-as-promised'));
 
 // Prerequisite Test
-var	ads3 = require('./home-ads-3.js');
+var	ads1 = require('./web-ads-1.js');
 
 
 /**
- *	300x600 clicks through to appropriate destination
- *	- 300x600 appears in right rail next to content feed
+ *  728x90 clicks through to approrpiate destination
+ *	- 728x90 appears below small carousel
  *	- click ad and print title
  */
-exports.railAdsClick = function(driver) {
+exports.bottomAdsClick = function(driver) {
 
-	// 300x600 appears in right rail next to content feed
-	var ads = ads3.railAdsAppear(driver);
-
+	// 728x90 appears below small carousel
+	var ads = ads1.bottomAdsAppear(driver);
+	
 	// click ad and print title
 	ads.click();
 	driver.sleep(1000);
 	driver.getAllWindowHandles().then(function(tabs) {
 		expect(tabs.length, "ad cannot be clicked/ will not opened").
-			to.equal(2);
-
+    	to.equal(2);
+    	
     driver.switchTo().window(tabs[1]);
 		driver.getTitle().then(function(title) {
 			console.log("\tads redirect to \"" + title + "\"");

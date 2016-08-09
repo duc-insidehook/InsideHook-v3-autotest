@@ -20,8 +20,8 @@ content-feed:
 	mocha ./content-feed/content-feed-test.js $(OPT) $(FLAGS)
 social-carousel:
 	mocha ./social-carousel/social-carousel-test.js $(OPT) $(FLAGS)
-home-ads:
-	mocha ./home-ads/home-ads-test.js $(OPT) $(FLAGS)
+web-ads:
+	mocha ./web-ads/web-ads-test.js $(OPT) $(FLAGS)
 trending-tags:
 	mocha ./trending-tags/trending-tags-test.js $(OPT) $(FLAGS)
 main-content:
@@ -36,27 +36,27 @@ subcat-header:
 # Available Test Template
 # -------------------------------------------------------------------------
 HOME_TESTS = global-nav subscribe large-carousel featured-grid \
-	content-feed social-carousel home-ads trending-tags
+	content-feed social-carousel web-ads trending-tags
 home:
 	for target in $(HOME_TESTS); do \
 		make $$target; \
 	done
 
 MAIN_CATEGORY_TESTS = global-nav subscribe large-carousel featured-grid \
-	content-feed social-carousel home-ads trending-tags subcat-header
+	content-feed social-carousel web-ads trending-tags subcat-header
 main-category:
 	for target in $(MAIN_CATEGORY_TESTS); do \
 		make $$target; \
 	done
 
-SUB_CATEGORY_TESTS = global-nav subscribe content-feed home-ads trending-tags
+SUB_CATEGORY_TESTS = global-nav subscribe content-feed web-ads trending-tags
 sub-category:
 	for target in $(SUB_CATEGORY_TESTS); do \
 		make $$target; \
 	done
 
 FEATURED_TESTS = global-nav subscribe trending-tags main-content sub-content \
-	home-ads 
+	web-ads 
 featured:
 	for target in $(FEATURED_TESTS); do \
 		make $$target; \
@@ -67,7 +67,7 @@ featured:
 # PHONY
 # -------------------------------------------------------------------------
 .PHONY: global-nav subscribe large-carousel featured-grid content-feed \
-	social-carousel home-ads trending-tags main-content sub-content \
+	social-carousel web-ads trending-tags main-content sub-content \
 	subcat-header
 
 

@@ -53,7 +53,7 @@ exports.clickContentFeed = function(driver) {
 			// article within Insidehook domain
 			if (linkUrl.includes("insidehook")) {
 				driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
-				expect(driver.getCurrentUrl(), "wrong destination").
+				expect(driver.getCurrentUrl(), "wrong destination\n").
 					to.eventually.equal(linkUrl);
 			} 
 			// article power by another party - required opening new tab
@@ -63,7 +63,7 @@ exports.clickContentFeed = function(driver) {
 						to.equal(2);
 						
       		driver.switchTo().window(tabs[1]);
-      		expect(driver.getCurrentUrl(), "wrong destination").
+      		expect(driver.getCurrentUrl(), "wrong destination\n").
       			to.eventually.have.string(linkUrl);
       		driver.close(); driver.switchTo().window(tabs[0]);
       	});

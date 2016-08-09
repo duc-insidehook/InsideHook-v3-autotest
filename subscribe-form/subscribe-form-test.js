@@ -26,7 +26,7 @@ var subscribeForm1 = require('./subscribe-form-1.js'),
  *  'right' - subscribe form on the right rail
  *  'bot' - subscribe form on the bottom footer
  */
-var formPosition = 'top',
+var formPosition = 'top';
 
 
 test.before(function() {

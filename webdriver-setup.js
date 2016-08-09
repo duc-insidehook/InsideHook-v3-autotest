@@ -81,5 +81,9 @@ exports.template = function() {
  */
 exports.rawTemplate = function() {
 
-  return argv.template;
+  var availableTemplates = ['home', 'main-category', 'sub-category', 'featured'];
+  if( availableTemplates.indexOf(argv.template) >= 0) {
+   return argv.template;
+  }
+  else return "home";
 }
