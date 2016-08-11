@@ -68,7 +68,7 @@ exports.template = function() {
     return "http://www-stage.insidehook.com/new-york/what-to-buy/";
   }
   else if( argv.template == 'featured') {
-    return "http://www-stage.insidehook.com/nation/mclarens-one-off-570s-formula-1-tribute-is-a-piece/";
+    return "http://www.insidehook.com/nation/monaco-boat-services-hall-of-vintage-yachts-look-like-formula-1-racers/";
   }
   else { // home
     return  "http://www-stage.insidehook.com/";

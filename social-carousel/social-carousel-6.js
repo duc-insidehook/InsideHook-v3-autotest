@@ -12,6 +12,8 @@ var socialCarousel1 = require('./social-carousel-1.js');
 
 /**
  *  Click and drag to advance the slide
+ *  - drag right and expect current slide's index to differ from initial slide's index
+ *  - drag left and expect current slide's index to equal initial slide's index
  */
 exports.clickAndDrag = function(driver) {
 

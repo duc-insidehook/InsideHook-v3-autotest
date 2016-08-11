@@ -33,15 +33,15 @@ exports.clickContentFeed = function(driver) {
 			// article within Insidehook domain
 			if (linkUrl.includes("insidehook")) {
 				driver.wait(webdriver.until.stalenessOf(articleLink), 10000);
-				expect(driver.getCurrentUrl() "wrong destination\n").
+				expect(driver.getCurrentUrl(), "wrong destination\n").
 					to.eventually.equal(linkUrl);
 			} 
 			// article power by another party - required opening new tab
 			else {
-				expect(tabs.length, "item cannot be clicked/ will not open").
+				driver.getAllWindowHandles().then(function(tabs) {
+					expect(tabs.length, "item cannot be clicked/ will not open").
 						to.equal(2);
 
-					expect(tabs.length).to.equal(2);
       		driver.switchTo().window(tabs[1]);
       		expect(driver.getCurrentUrl(), "wrong destination\n").
       			to.eventually.have.string(linkUrl);

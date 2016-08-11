@@ -3,8 +3,7 @@
  */
 var webdriver = require('selenium-webdriver'),
     chai = require('chai'),
-    expect = chai.expect,
-    testEmail = 'test@insidehook.com';
+    expect = chai.expect;
 chai.use(require('chai-as-promised'));
 
 // Prerequisite Test
@@ -16,6 +15,7 @@ var	subscribeForm9 = require('./subscribe-form-9.js');
  *	- subscribe to Insidehook and go to member services
  *	- click on "not you?" and expect a sign in modal
  *	- log in with a different email
+ *	- expect new user
  */
 exports.notYou = function(driver, formPosition) {
 
@@ -25,6 +25,7 @@ exports.notYou = function(driver, formPosition) {
 	// click on "not you?" and expect a sign in modal
 	var notYou = driver.findElement(webdriver.By.linkText("not you?"));
 	var modalMember = driver.findElement(webdriver.By.css("#modal-member"));
+	var modalSignUp = driver.findElement(webdriver.By.css("#modal-sign-up"));
 
 	notYou.click();
 	driver.wait(webdriver.until.elementIsVisible(modalMember), 5000);
@@ -32,12 +33,15 @@ exports.notYou = function(driver, formPosition) {
 	// log in with a different email
 	var emailInput = modalMember.findElement(webdriver.By.name("email"));
 	var logIn = modalMember.findElement(webdriver.By.css(".button.large.expand"));
+	var memberError = modalMember.findElement(webdriver.By.css(".error"));
+	var joinNow = modalMember.findElement(webdriver.By.linkText("Join Now"));
 
-	emailInput.sendKeys(testEmail);
+	emailInput.sendKeys('not-yet-a-member@insidehook.com');
 	logIn.submit();
-	driver.wait(webdriver.until.stalenessOf(logIn), 5000);
-
-	var displayedEmail = driver.findElement(webdriver.By.css(".email-html"));
-	expect(displayedEmail.getText()).to.eventually.equal(testEmail);
-
+	driver.wait(webdriver.until.elementIsVisible(memberError), 5000);
+	driver.sleep(1000);
+	
+	joinNow.click();
+	driver.wait(webdriver.until.elementIsVisible(modalSignUp), 5000);
+	driver.sleep(1000);
 }

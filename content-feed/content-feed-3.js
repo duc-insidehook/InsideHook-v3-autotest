@@ -21,8 +21,8 @@ exports.clickContentFeed = function(driver) {
 
 	// click on the latest tab and expect 7 articles initially
 	var feedLatest = contentFeed1.sevenItemsLatest(driver);
+
 	var feedItems = feedLatest.findElements(webdriver.By.css("article"));
-	
 	feedItems.then(function(articles) {
 
 		var titleUrl = new Array(),

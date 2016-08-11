@@ -12,15 +12,16 @@ var featuredGrid0 = require('./featured-grid-0.js');
 
 /**
  *  Three grid items appear as expected
+ *	- retrieve article grid
  *	- check articles' date, hour, edition
  *	- check image url's and title's url
  */
 exports.gridItemDisplay = function(driver) {
 
-	// retrieve grid
+	// retrieve article grid
 	var contentGrid = featuredGrid0.gridItemAppear(driver);
+
 	var gridArticles = contentGrid.findElements(webdriver.By.tagName("article"));
-	
 	gridArticles.then(function(articles) {
 		expect(articles.length).to.equal(3);
 

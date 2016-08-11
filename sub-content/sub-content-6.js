@@ -12,6 +12,7 @@ var	subContent4 = require('./sub-content-4.js');
 
 /**
  *  More articles click through to appropriate destination
+ *	- test opening a one of the latest 3 articles
  */
 exports.clickArticles = function(driver) {
 
@@ -19,6 +20,7 @@ exports.clickArticles = function(driver) {
 	var articles = content[1];
 
 	articles.then(function(articles) {
+
 		// test opening a one of the latest 3 articles
 		var testArticle = Math.floor(Math.random() * 3);
 		var anchor = articles[testArticle].findElement(webdriver.By.css(".panel a"));

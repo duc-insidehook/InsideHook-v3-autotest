@@ -15,7 +15,7 @@ var	subscribeForm9 = require('./subscribe-form-9.js');
  *	- subscribe to Insidehook and go to member services
  *	- locate all social icons
  *	- check url of social icons
- *	- facebook icon links to "Post to Facebook"
+ *	- facebook icon links to "Facebook / Post to Facebook"
  *	- twitter icon links to "Post to Twitter"
  */
 exports.invitePanel = function(driver, formPosition) {
@@ -43,7 +43,7 @@ exports.invitePanel = function(driver, formPosition) {
 							.and.have.string('InsideHook');
   });
 
-	// facebook icon links to "Post to Facebook"
+	// facebook icon links to "Facebook / Post to Facebook"
 	fbIcon.click(); driver.sleep(1000);
 	driver.getAllWindowHandles().then(function(tabs) {
 		expect(tabs.length, "fbIcon cannot be clicked/ will not opened").

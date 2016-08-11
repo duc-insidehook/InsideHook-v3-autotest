@@ -13,10 +13,8 @@ chai.use(require('chai-as-promised'));
  */    
 exports.sevenItemsPicks = function(driver) {
 
-	// wait until content feed appears
 	driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("EDITOR'S PICKS")), 10000);
 
-	// elements
 	var buttonPicks = driver.findElement(webdriver.By.linkText("EDITOR'S PICKS"));
 	var feedPicks = driver.findElement(webdriver.By.css("#feed-picks"));
 

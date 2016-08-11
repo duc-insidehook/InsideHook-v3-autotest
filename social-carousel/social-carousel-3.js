@@ -96,7 +96,7 @@ var subCatVersion = function(driver, socialSection) {
 
           if( subcatUrl!=null) {
             carouselUrl[carouselIndex++].then(function(carouselUrl) {
-              expect(subcatUrl, "subcat from carousel do not match with subcat form header").
+              expect(subcatUrl, "subcat from carousel do not match with subcat form header\n").
                 to.equal(carouselUrl);
             });
           }
@@ -131,7 +131,8 @@ var goodsVersion = function(socialSection) {
       var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
       titleUrl[i] = articles[i].findElement(webdriver.By.css("h3 a")).getAttribute('href');
       imageUrl.then(function(imageUrl) {
-        expect(titleUrl[titleIndex++], "title and image don't have the same url").
+        
+        expect(titleUrl[titleIndex++], "title and image don't have the same url\n").
           to.eventually.equal(imageUrl);
       });
     }

@@ -11,7 +11,7 @@ subContent4 = require('./sub-content-4.js');
 
 /**
  *  "More from InsideHook" becomes "This Is The End" when no more items exist
- *	- click on the latest tab and expect 7 articles initially
+ *	- wait until more articles appear
  *	- repeatedly click More button until it display 'This Is The End'
  */
 exports.noMore = function(driver) {
@@ -19,6 +19,7 @@ exports.noMore = function(driver) {
 	// wait until more articles appear
 	subContent4.moreArticles(driver);
 
+	// Repeatedly click More button until it display 'This Is The End'
 	clickMoreButton(driver);
 }
 
@@ -27,7 +28,6 @@ var clickMoreButton = function(driver) {
 
 	var moreButton = driver.findElement(webdriver.By.css("#loadArtMedia"));
 	
-	// Repeatedly click More button until it display 'This Is The End'
 	moreButton.sendKeys(webdriver.Key.ESCAPE);	// need for firefox, optional for chrome	
 	moreButton.click();
 

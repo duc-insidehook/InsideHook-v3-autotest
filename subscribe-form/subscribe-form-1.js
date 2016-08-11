@@ -9,6 +9,9 @@ chai.use(require('chai-as-promised'));
 
 /**
  *  Subscribe form pops up after clicking subscribe hyperlink
+ *  - top subscribe button
+ *  - right rail subscribe form
+ *  - bot footer subscribe form
  */    
 exports.openForm = function(driver, formPosition) {
 

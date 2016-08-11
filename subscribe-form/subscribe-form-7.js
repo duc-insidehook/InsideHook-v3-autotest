@@ -61,7 +61,7 @@ exports.thxForm = function(driver, formPosition) {
 								and.have.string('New York');
 	});
 	emailInput.getAttribute('value').then(function(email) {
-		expect(email).to.equal(testEmail);  
+		expect(email).to.equal(testEmail);
 	})
 
 	updateButton.submit();

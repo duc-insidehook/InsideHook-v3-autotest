@@ -19,6 +19,7 @@ exports.noMore = function(driver) {
 	// select The Latest tab and make sure there'are 7 items initially
 	contentFeed1.sevenItemsLatest(driver);
 
+	// Repeatedly click More button until it display 'This Is The End'
 	clickMoreButton(driver);
 }
 
@@ -27,7 +28,6 @@ var clickMoreButton = function(driver) {
 
 	var moreButton = driver.findElement(webdriver.By.css("#loadMedia"));
 
-	// Repeatedly click More button until it display 'This Is The End'
 	moreButton.sendKeys(webdriver.Key.ESCAPE);	// need for firefox, optional for chrome	
 	moreButton.click();
 	

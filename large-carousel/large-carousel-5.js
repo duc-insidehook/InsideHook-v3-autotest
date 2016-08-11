@@ -11,6 +11,8 @@ var	largeCarousel0 = require('./large-carousel-0.js');
 
 /**
  *	Click the arrows to advance the slide
+ *	- click prev and expect current slide's index to differ from initial slide's index
+ *	- click next and expect current slide's index to equal initial slide's index
  */
 exports.slickArrows = function(driver) {
 

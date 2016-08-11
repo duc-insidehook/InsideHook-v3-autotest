@@ -12,6 +12,7 @@ chai.use(require('chai-as-promised'));
  *	- check header text
  *	- check feature article's image and title
  *	- check grid articles' date, hour, edition, image, and title
+ *	- check grid article's image and title
  */
 exports.moreArticles = function(driver) {
 
@@ -25,7 +26,7 @@ exports.moreArticles = function(driver) {
 	// check header text
 	expect(h3.getText()).to.eventually.equal("GO ON, KEEP READING:");
 
-	// check feature article
+	// check feature article's image and title
 	var imageUrl = featured.findElement(webdriver.By.css(".th a")).getAttribute('href');
 	imageUrl.then(function(imageUrl) {
 		var titleUrl = featured.findElement(webdriver.By.css(".panel a")).getAttribute('href');
@@ -41,12 +42,12 @@ exports.moreArticles = function(driver) {
 
 		expect(articles.length).to.equal(6);
 		for(i=0; i<articles.length; i++) {
-			// expect every article has index, date, hour, and edition
+			// check grid articles' date, hour, edition, image, and title
 			expect(articles[i].getAttribute("data-date")).to.eventually.not.equal(null);
 			expect(articles[i].getAttribute("data-hour")).to.eventually.not.equal(null);
 			expect(articles[i].getAttribute("data-edition")).to.eventually.not.equal(null);
 
-			// expect image's url and title's url of the same article to equal
+			// check grid article's image and title
 			var imageUrl = articles[i].findElement(webdriver.By.css(".th a")).getAttribute('href');
 			titleUrl[i] = articles[i].findElement(webdriver.By.css(".panel a")).getAttribute('href');
 			imageUrl.then(function(imageUrl) {

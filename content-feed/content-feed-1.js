@@ -13,10 +13,8 @@ chai.use(require('chai-as-promised'));
  */
 exports.sevenItemsLatest = function(driver) {
 	
-	// wait until content feed appears
 	driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("THE LATEST")), 10000);
 
-	// elements
 	var buttonLatest = driver.findElement(webdriver.By.linkText("THE LATEST"));
 	var feedLatest = driver.findElement(webdriver.By.css("#feed-latest"));
 

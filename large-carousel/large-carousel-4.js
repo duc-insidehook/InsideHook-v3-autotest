@@ -11,6 +11,8 @@ var largeCarousel0 = require('./large-carousel-0.js');
 
 /**
  *  Click the coins to advance the slide
+ *	- start from the last coin
+ *	- expect coin index to match slide index
  */
 exports.slickCoins = function(driver) {
 
@@ -18,15 +20,19 @@ exports.slickCoins = function(driver) {
 	var slickCoins = driver.findElement(webdriver.By.css(".fs-slick .slick-dots"));
 	var coins = slickCoins.findElements(webdriver.By.tagName("button"));
 
-	coins.then(function(coin) {
-		var coinIndex = coin.length-1;
-		for (i=coin.length-1; i>=0; i--) {
+	coins.then(function(slickCoins) {
+
+		// start from the last coin
+		var coinIndex = coins.length-1;
+		for (i=coins.length-1; i>=0; i--) {
 			freezeTheSlide(driver);
-			coin[i].click(); driver.sleep(1000);
+			coins[i].click(); driver.sleep(1000);
 			
+			// expect coin index to match slide index
 			var activeSlide = largeCarousel0.getActiveSlide(driver);
 			activeSlide.getAttribute('data-slick-index').then(function(slideIndex) {
-				expect(parseInt(slideIndex)).to.equal(coinIndex--);
+				expect(parseInt(slideIndex), "coins index do not match slides index").
+					to.equal(coinIndex--);
 			});
 		}
 	});

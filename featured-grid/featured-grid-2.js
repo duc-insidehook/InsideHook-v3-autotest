@@ -23,6 +23,7 @@ exports.featuredItemClick = function(driver, rawTemplate) {
 	 */
 	var typeOfTest = Math.floor(Math.random() * 2);
 
+	// test featured title
 	if( typeOfTest==0) {
 		var feature = featuredGrid1.opaqueOnHover(driver, rawTemplate);
 		var featuredTitle = feature.findElement(webdriver.By.css(".panel h2 a"));
@@ -30,10 +31,12 @@ exports.featuredItemClick = function(driver, rawTemplate) {
 			featuredTitle.click();
 
 			driver.wait(webdriver.until.stalenessOf(feature), 10000);
-			expect(driver.getCurrentUrl(), "title clicks to wrong desitnation\n").to.eventually.equal(linkUrl);
+			expect(driver.getCurrentUrl(), "title clicks to wrong desitnation\n").
+				to.eventually.equal(linkUrl);
 		});
 	}
 
+	// test featured image
 	else {
 		var feature = featuredGrid1.opaqueOnHover(driver, rawTemplate);
 		var anchor = feature.findElement(webdriver.By.css("a"));
@@ -41,16 +44,17 @@ exports.featuredItemClick = function(driver, rawTemplate) {
 		anchor.getAttribute("href").then(function(linkUrl) {
 			/**
 			 *	Note:
-			 *	normal direct click on the article would result in clicking in the middle of the article,
-			 *	test will fail because the text paragraph panel will receive the click instead
-			 *	this action sequence move 100 pixels away from the top left corner of the feature article and click
+			 *	normal direct click on the image would result in clicking in the middle of the image,
+			 *	test will fail because the text paragraph panel will receive the click instead of the image
+			 *	this action sequence move the cursor 100 pixels away from the top left corner of the image and click on that position
 			 */
 			new webdriver.ActionSequence(driver).
 	  			mouseMove(feature, {x:100, y:100}).
 	  			click().perform(); 
 
 	  	driver.wait(webdriver.until.stalenessOf(feature), 10000);
-	  	expect(driver.getCurrentUrl(), "image clicks to wrong destination\n").to.eventually.equal(linkUrl);
+	  	expect(driver.getCurrentUrl(), "image clicks to wrong destination\n").
+	  		to.eventually.equal(linkUrl);
 		});
 	}
 

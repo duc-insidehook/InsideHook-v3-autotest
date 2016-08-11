@@ -19,7 +19,7 @@ exports.tags = function(driver) {
 
   // retrieve body contents
   var bodyContents = mainContent2.imageAndBody(driver);
-  // socialStick, tags, share, znetBlock
+  // leftSocialStick, tags, bottomSocialShare, znetBlock
 
   var tags = bodyContents[1];
   var tagsLink = tags.findElements(webdriver.By.tagName('a'));
@@ -31,7 +31,8 @@ exports.tags = function(driver) {
       
       tagsLink[index].click();
       driver.wait(webdriver.until.stalenessOf(tagsLink[index]), 10000);
-      expect(driver.getCurrentUrl()).to.eventually.have.string(linkUrl);
+      expect(driver.getCurrentUrl(), "wrong destination\n").
+        to.eventually.have.string(linkUrl);
     });
   });
 

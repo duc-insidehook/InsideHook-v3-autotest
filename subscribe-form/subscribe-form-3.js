@@ -18,7 +18,7 @@ var	subscribeForm1 = require('./subscribe-form-1');
  */
 exports.displayForm = function(driver, formPosition) {
   
-  // open Subscribe Form
+  // retrieve Subscribe Form
  	var signUpForm = subscribeForm1.openForm(driver, formPosition);
  	driver.actions().mouseMove(signUpForm).perform();
 
@@ -50,7 +50,7 @@ exports.displayForm = function(driver, formPosition) {
 		expect(zipInput.isDisplayed(), "no zip code input").
 		to.eventually.equal(true);
 
-	// check form elements' types
+	// check form elements' type
 	expect(emailInput.getTagName()).to.eventually.equal('input');
 	expect(joinButton.getTagName()).to.eventually.equal('button');
 	expect(termsAndCons.getTagName()).to.eventually.equal('input');

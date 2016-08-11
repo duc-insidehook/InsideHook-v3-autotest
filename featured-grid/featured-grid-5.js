@@ -16,13 +16,13 @@ var featuredGrid0 = require('./featured-grid-0.js');
  */
 exports.ad = function(driver) {
 
-	// wait for grid to appear
+	// wait for article grid to appear
 	featuredGrid0.gridItemAppear(driver);
 
 	/**
 	 *	locate displaying ad in the grid 
-	 *	there are two ads, one next to feature and one under feature
-	 *	only one should be visible at a time, depending on window size
+	 *	-	there are two ads, one next to feature and one under feature
+	 *	-	only one should be visible at a time, depending on window size
 	 */
 	var visibleAd;
 	var ads = driver.findElements(webdriver.By.css(".ad-feat"));
@@ -31,21 +31,25 @@ exports.ad = function(driver) {
 			to.equal(2);
 
 		ads[0].isDisplayed().then(function(firstAdIsDisplayed) {
-			if( firstAdIsDisplayed ) {
+			if( firstAdIsDisplayed)
 				visibleAd = 0;
-			} else {
-				expect(ads[1].isDisplayed, "ads are not displaying").to.eventually.equal(true);
+			else
 				visibleAd = 1;
-			}
 		});
 
 		// expect frame size is 300x250
 		var ads = driver.findElements(webdriver.By.css(".ad-feat"));
 		ads.then(function(ads) {
+			expect(ads[visibleAd].isDisplayed(), "ads are not displaying").
+				to.eventually.equal(true);
+
 			ads[visibleAd].findElement(webdriver.By.css("iframe")).then(function(adFrame) {
 				adFrame.getSize().then(function(frame) {
-					expect(frame.width, "width is not 300").to.equal(300);
-					expect(frame.height, "height is not 250").to.equal(250);
+
+					expect(frame.width, "width is not 300").
+						to.equal(300);
+					expect(frame.height, "height is not 250").
+						to.equal(250);
 				});	
 			});
 		});

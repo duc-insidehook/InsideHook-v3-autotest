@@ -20,7 +20,7 @@ exports.znet = function(driver) {
 
   // retrieve body contents
   var bodyContents = mainContent2.imageAndBody(driver);
-  // socialStick, tags, share, znetBlock
+  // leftSocialStick, tags, bottomSocialShare, znetBlock
   
   var znetBlock = bodyContents[3];
   var znetArticles = znetBlock.findElements(webdriver.By.css('.zergentity a'));
@@ -30,9 +30,11 @@ exports.znet = function(driver) {
     
     // click on a random znet article
     var index = Math.floor(Math.random() * znetArticles.length);
-    znetArticles[index].click();
+    znetArticles[index].click(); driver.sleep(1000);
+    
     driver.getAllWindowHandles().then(function(tabs) {
-      expect(tabs.length).to.equal(2);
+      expect(tabs.length, "item cannot be clicked/ will not opened").
+        to.equal(2);
 
       driver.switchTo().window(tabs[1]);
       expect(driver.getCurrentUrl()).to.eventually.have.string('http://www.zergnet.com/');

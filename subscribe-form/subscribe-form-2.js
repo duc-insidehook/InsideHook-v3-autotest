@@ -24,4 +24,6 @@ exports.closeForm = function(driver, formPosition) {
 		driver.wait(webdriver.until.elementIsNotVisible(signUpForm), 5000);
 	}
 
+	else console.log('\t- the test bellow is not applicable on this template');
+
 }
