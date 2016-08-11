@@ -11,7 +11,7 @@ var webdriver = require('selenium-webdriver'),
  */
 exports.insidehookLogo = function(driver) {
   
-  var logo = driver.findElement(webdriver.By.css('.name a'));
+  var logo = driver.findElement(webdriver.By.css('.title-area a'));
   logo.click();
   
   driver.wait(webdriver.until.stalenessOf(logo), 10000);

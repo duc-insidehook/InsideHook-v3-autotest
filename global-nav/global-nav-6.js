@@ -9,14 +9,16 @@ chai.use(require('chai-as-promised'));
 
 /**
  *  Social icons link to InsideHook's social pages
+ *  - locate social icons
  *  - check href attirbute
  *  - click all icons
  */
 exports.socialButtons = function(driver) {
 
-  /*
-   *  find all elements on global-nav top-bar with round class
-   *  social icons are expected to be listed in this order: fb, gram, twitter
+  /**
+   *  Locate social icons
+   *  - find all elements on global-nav top-bar with round class
+   *  - social icons are expected to be listed in this order: fb, gram, twitter
    */
   var socialIcons = driver.findElements(webdriver.By.css(".global-navigation.top-bar .right.show-for-medium-up .round"));
   socialIcons.then(function(socialIcons) {
