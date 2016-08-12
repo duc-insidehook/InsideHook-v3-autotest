@@ -70,6 +70,9 @@ exports.template = function() {
   else if( argv.template == 'featured') {
     return "http://www.insidehook.com/nation/monaco-boat-services-hall-of-vintage-yachts-look-like-formula-1-racers/";
   }
+  else if( argv.template == 'goods') {
+   return "http://www-stage.insidehook.com/nation/goods/"; 
+  }
   else { // home
     return  "http://www-stage.insidehook.com/";
   }
@@ -81,7 +84,7 @@ exports.template = function() {
  */
 exports.rawTemplate = function() {
 
-  var availableTemplates = ['home', 'main-category', 'sub-category', 'featured'];
+  var availableTemplates = ['home', 'main-category', 'sub-category', 'featured', 'goods'];
   if( availableTemplates.indexOf(argv.template) >= 0) {
    return argv.template;
   }

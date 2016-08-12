@@ -53,9 +53,9 @@ exports.itemsFeature = function(driver, rawTemplate) {
           moreButton.click();
           driver.wait(webdriver.until.elementIsNotVisible(backPanel), 5000);
           driver.sleep(1000);
-        })
+        });
       }
-    })
+    });
   });
 
 }

@@ -30,7 +30,8 @@ sub-content:
 	mocha ./sub-content/sub-content-test.js $(OPT) $(FLAGS)
 subcat-header:
 	mocha ./subcat-header/subcat-header-test.js $(OPT) $(FLAGS)
-
+content-good:
+	mocha ./content-good/content-good-test.js $(OPT) $(FLAGS)
 
 #
 # Available Test Template
@@ -55,6 +56,12 @@ sub-category:
 		make $$target; \
 	done
 
+GOODS_TESTS = global-nav subscribe content-good web-ads trending-tags 
+goods:
+	for target in $(GOODS_TESTS); do \
+		make $$target; \
+	done
+
 FEATURED_TESTS = global-nav subscribe trending-tags main-content sub-content \
 	web-ads 
 featured:
@@ -68,6 +75,6 @@ featured:
 # -------------------------------------------------------------------------
 .PHONY: global-nav subscribe large-carousel featured-grid content-feed \
 	social-carousel web-ads trending-tags main-content sub-content \
-	subcat-header
+	subcat-header content-good
 
 
