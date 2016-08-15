@@ -22,6 +22,8 @@ exports.autoAdvance = function(driver) {
 	// href check first-clone vs last-item, first-item vs last-clone
 	trackItems.then(function(trackItem) {
 		var numOfItems = trackItem.length;
+		expect(numOfItems, "carousel does not have more than 1 slide").
+			to.be.above(1);
 
 		trackItem[0].getAttribute('href').then(function(firstClone) {
 			trackItem[numOfItems-2].getAttribute('href').then(function(lastItem) {

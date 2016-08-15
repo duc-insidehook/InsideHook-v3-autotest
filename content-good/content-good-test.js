@@ -43,7 +43,7 @@ test.describe('Content Good', function() {
   test.it('good items click to appropriate destination', function() {
     contentGood3.clickgoodItems(driver);
   });
-  test.it('clicking More From InsideHook button loads 6 more items for the selected tab', function() {
+  test.it('clicking More From InsideHook button loads 12 more good items', function() {
     contentGood4.clickMore(driver);
   });
   test.it('"More from InsideHook" becomes "This Is The End" when no more items exist', function() {

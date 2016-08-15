@@ -23,7 +23,7 @@ exports.tagsClick = function(driver) {
 		for(var i=0; i<tags.length; i++) {
 			var tagsUrl = tags[i].findElement(webdriver.By.css("a"));
 			tagsUrl.getAttribute('href').then(function(tagsUrl) {
-				expect(tagsUrl).to.have.string('http://www-stage.insidehook.com/tags/');
+				expect(tagsUrl).to.have.string('insidehook.com/tags/');
 			});
 		}
 

@@ -14,8 +14,8 @@ var	subscribeForm9 = require('./subscribe-form-9.js');
  *  "not you?"" allows switching user
  *	- subscribe to Insidehook and go to member services
  *	- click on "not you?" and expect a sign in modal
- *	- log in with a different email
- *	- expect new user
+ *	- log in with a not-yet-subscribed-email and expect error
+ *	- click "join now" and expect sign up modal
  */
 exports.notYou = function(driver, formPosition) {
 
@@ -30,17 +30,18 @@ exports.notYou = function(driver, formPosition) {
 	notYou.click();
 	driver.wait(webdriver.until.elementIsVisible(modalMember), 5000);
 
-	// log in with a different email
 	var emailInput = modalMember.findElement(webdriver.By.name("email"));
 	var logIn = modalMember.findElement(webdriver.By.css(".button.large.expand"));
 	var memberError = modalMember.findElement(webdriver.By.css(".error"));
 	var joinNow = modalMember.findElement(webdriver.By.linkText("Join Now"));
 
+	// log in with a not-yet-subscribed-email and expect error
 	emailInput.sendKeys('not-yet-a-member@insidehook.com');
 	logIn.submit();
 	driver.wait(webdriver.until.elementIsVisible(memberError), 5000);
 	driver.sleep(1000);
 	
+	// click "join now" and expect sign up modal
 	joinNow.click();
 	driver.wait(webdriver.until.elementIsVisible(modalSignUp), 5000);
 	driver.sleep(1000);
