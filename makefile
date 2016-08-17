@@ -32,38 +32,43 @@ subcat-header:
 	mocha ./subcat-header/subcat-header-test.js $(OPT) $(DEFAULT_OPT) $(FLAGS)
 content-good:
 	mocha ./content-good/content-good-test.js $(OPT) $(DEFAULT_OPT) $(FLAGS)
+global-foot:
+	mocha ./global-foot/global-foot-test.js $(OPT) $(DEFAULT_OPT) $(FLAGS)
+
 
 #
 # Available Test Template
 # -------------------------------------------------------------------------
 HOME_TESTS = global-nav subscribe-form large-carousel featured-grid \
-	content-feed social-carousel web-ads trending-tags
+	content-feed social-carousel web-ads trending-tags global-foot
 home:
 	for target in $(HOME_TESTS); do \
 		make $$target; \
 	done
 
 MAIN_CATEGORY_TESTS = global-nav subscribe-form large-carousel featured-grid \
-	content-feed social-carousel web-ads trending-tags subcat-header
+	content-feed social-carousel web-ads trending-tags subcat-header global-foot
 main-category:
 	for target in $(MAIN_CATEGORY_TESTS); do \
 		make $$target; \
 	done
 
-SUB_CATEGORY_TESTS = global-nav subscribe-form content-feed web-ads trending-tags
+SUB_CATEGORY_TESTS = global-nav subscribe-form content-feed web-ads trending-tags \
+	global-foot
 sub-category:
 	for target in $(SUB_CATEGORY_TESTS); do \
 		make $$target; \
 	done
 
-GOODS_TESTS = global-nav subscribe-form content-good web-ads trending-tags 
+GOODS_TESTS = global-nav subscribe-form content-good web-ads trending-tags \
+	global-foot
 goods:
 	for target in $(GOODS_TESTS); do \
 		make $$target; \
 	done
 
 FEATURED_TESTS = global-nav subscribe-form trending-tags main-content sub-content \
-	web-ads 
+	web-ads global-foot
 featured:
 	for target in $(FEATURED_TESTS); do \
 		make $$target; \
@@ -75,6 +80,6 @@ featured:
 # -------------------------------------------------------------------------
 .PHONY: global-nav subscribe-form large-carousel featured-grid content-feed \
 	social-carousel web-ads trending-tags main-content sub-content \
-	subcat-header content-good
+	subcat-header content-good global-foot
 
 

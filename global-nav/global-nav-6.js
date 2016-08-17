@@ -25,9 +25,9 @@ exports.socialButtons = function(driver) {
     expect(socialIcons.length, "global-nav does not have 3 social icons").
       to.equal(3);
     
-    var fbIcon = socialIcons[0];
-    var gramIcon = socialIcons[1];
-    var twitIcon = socialIcons[2];
+    var fbIcon = socialIcons[0],
+        gramIcon = socialIcons[1],
+        twitIcon = socialIcons[2];
 
     // check href attribute
     expect(fbIcon.getAttribute('href')).to.eventually.equal('https://www.facebook.com/InsideHook');

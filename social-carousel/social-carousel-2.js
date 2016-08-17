@@ -30,9 +30,9 @@ exports.socialIcons = function(driver, rawTemplate) {
         to.equal(3);
       
       // social icons are expected to be listed in this order: fb, gram, twitter
-      var fbIcon = socialIcons[0];
-      var gramIcon = socialIcons[1];
-      var twitIcon = socialIcons[2];
+      var fbIcon = socialIcons[0],
+          gramIcon = socialIcons[1],
+          twitIcon = socialIcons[2];
 
       // Test href Attribute
       expect(fbIcon.getAttribute('href')).to.eventually.equal('https://www.facebook.com/InsideHook');

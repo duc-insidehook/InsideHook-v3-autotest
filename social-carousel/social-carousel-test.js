@@ -48,7 +48,7 @@ test.describe('Social Carousel', function() {
     socialCarousel3.carouselItemsDisplay(driver, rawTemplate);
   }); 
   test.it('300x300 for each item, goods item have description panel', function() {
-    socialCarousel4.itemsFeature(driver, rawTemplate);
+    socialCarousel4.itemsFeature(driver);
   });
   test.it('items click through to appropriate destination', function() {
     socialCarousel5.carouselItemsClick(driver, rawTemplate);

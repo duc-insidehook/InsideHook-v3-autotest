@@ -46,12 +46,14 @@ var socialVersion = function(driver, socialSection) {
    */
   var itemLinks = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide.slick-active a"));
   itemLinks.then(function(itemLinks) {
-    expect(itemLinks.length, "number of displaying item is not 4").
+    expect(itemLinks.length, "number of displaying items is not 4").
       to.equal(4);
 
     // test opening a random item
     var index = Math.floor(Math.random() * itemLinks.length);
-    itemLinks[index].getAttribute('href').then(function(itemUrl) {
+    var itemTitle = itemLinks[index].findElement(webdriver.By.css(".overlay.bottom.expand h3"));
+    
+    itemTitle.getText().then(function(itemTitle) {
       itemLinks[index].click(); driver.sleep(1000);
 
       // expect article from fb/instagram
@@ -60,16 +62,16 @@ var socialVersion = function(driver, socialSection) {
           to.equal(2);
 
         driver.switchTo().window(tabs[1]);
-        driver.getTitle().then(function(title) {
-          if (title.includes("Facebook")) {
-            expect(title).to.have.string("InsideHook - Timeline | Facebook");
-          } else if (title.includes("Instagram")) {
-            expect(title).to.have.string("InsideHook on Instagram");
-          } else {
-            expect(title, "article is neither Facebook nor Instagram\n").
-              to.equal(null);
-          }
-        });
+        if( itemTitle == 'FACEBOOK') {
+          expect(driver.getTitle(), "Facebook item does not link to Facebook\n").
+            to.eventually.have.string("InsideHook - Timeline | Facebook");
+        } 
+        else if (itemTitle == 'INSTAGRAM') {
+          expect(driver.getTitle(), "Instagram item does not link to Instagram\n").
+            to.eventually.have.string("InsideHook on Instagram");
+        } 
+        else console.log("article is neither Facebook nor Instagram\n");
+
         driver.close(); driver.switchTo().window(tabs[0]);
       });
     });

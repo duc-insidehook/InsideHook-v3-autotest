@@ -15,7 +15,7 @@ var contentFeed1 = require('./content-feed-1.js');
  *	- click on the latest tab and expect 7 articles initially
  *	- check articles' date, hour, edition
  *	- check image's url and title's url
- *	- open a one of the lastest three articles
+ *	- open one of the lastest three articles
  */
 exports.clickContentFeed = function(driver) {
 
@@ -43,7 +43,7 @@ exports.clickContentFeed = function(driver) {
 			});
 		}
 		
-		// open a one of the lastest three articles
+		// open one of the lastest three articles
 		var testArticle = Math.floor(Math.random() * 3);
 		var articleLink = articles[testArticle].findElement(webdriver.By.css(".panel a"));
 		articleLink.getAttribute('href').then(function(linkUrl) {
@@ -56,7 +56,7 @@ exports.clickContentFeed = function(driver) {
 				expect(driver.getCurrentUrl(), "wrong destination\n").
 					to.eventually.equal(linkUrl);
 			} 
-			// article power by another party - required opening new tab
+			// article power by another party - required opening in new tab
 			else { 
 				driver.getAllWindowHandles().then(function(tabs) {
 					expect(tabs.length, "item cannot be clicked/ will not open").

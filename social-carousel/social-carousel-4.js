@@ -7,19 +7,20 @@ var webdriver = require('selenium-webdriver'),
 chai.use(require('chai-as-promised'));
 
 // Prerequisite Test
-var socialCarousel3 = require('./social-carousel-3.js');
+var socialCarousel1 = require('./social-carousel-1.js');
 
 
 /**
  *  300x300 for each item, goods item have description panel
- *  - retrieve slick items
+ *  - retrieve social section 
  *  - 300x300 for each item
  *  - toggle description panel (what-to-buy template only)
  */
-exports.itemsFeature = function(driver, rawTemplate) {
+exports.itemsFeature = function(driver) {
 
-	// retrieve slick items
-	var slickItems = socialCarousel3.carouselItemsDisplay(driver, rawTemplate);
+  // retrieve social section 
+  var socialSection = socialCarousel1.appear(driver);
+  var slickItems = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide"));
   slickItems.then(function(items) {
 
     // 300x300 for each item

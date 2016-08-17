@@ -56,7 +56,7 @@ test.describe('Content Feed', function() {
   test.it('more articles click through to appropriate destination', function() {
     subContent6.clickArticles(driver);
   });
-  test.it('clicking More From InsideHook button loads 6 more items for the selected tab', function() {
+  test.it('clicking More From InsideHook button loads 6 more items', function() {
     subContent7.clickMore(driver);
   }); 
   test.it('"More from InsideHook" becomes "This Is The End" when no more items exist', function() {

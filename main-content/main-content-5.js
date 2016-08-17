@@ -38,10 +38,10 @@ exports.socialIcons = function(driver) {
         to.equal(4);
 
       // social icons are expected to be listed in this order: fb, linkedin, twitter, mail
-      var fbIcon = socialIcons[0];
-      var linkedinIcon = socialIcons[1];
-      var twitIcon = socialIcons[2];
-      var mailIcon = socialIcons[3];
+      var fbIcon = socialIcons[0],
+          linkedinIcon = socialIcons[1],
+          twitIcon = socialIcons[2],
+          mailIcon = socialIcons[3];
       mailIcon.sendKeys(webdriver.Key.ESCAPE);  // need for firefox, optional for chrome  
 
       // Test fb Icon

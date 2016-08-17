@@ -16,7 +16,7 @@ var featuredGrid1 = require('./featured-grid-1.js'),
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
   driver = webdriverSetup.loadDriver();
-  rawTemplate = webdriverSetup.rawTemplate(),
+  rawTemplate = webdriverSetup.rawTemplate();
   driver.getWindowHandle();
 });
 

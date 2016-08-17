@@ -23,7 +23,7 @@ exports.clickThrough = function(driver) {
 
 		/**
 		 *	click on a random category
-		 *	avoid clicking more when there're more than 6 sub categories
+		 *	-	avoid clicking the more-dropdown when there're more than 6 sub categories
 		 */
 		var index = 5;
 		while( index==5) {

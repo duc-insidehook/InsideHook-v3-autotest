@@ -7,7 +7,7 @@ var webdriver = require('selenium-webdriver'),
 
 
 /**
- *  category links click through to appropriate category pages
+ *  Category links click through to appropriate category pages
  *  - open one of the main categories
  *  - open one of the sub categories
  *  - open a specific main-category/sub-category - enable by setting specific_test to true
@@ -89,7 +89,7 @@ exports.categoryLinks = function(driver) {
       driver.getCurrentUrl().then(function(currentUrl) {
 
         expect(currentUrl, "main category clicks to wrong destination").
-          to.equal(testUrl);  
+          to.equal(testUrl);
       });
     });
 

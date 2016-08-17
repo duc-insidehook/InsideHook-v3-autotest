@@ -21,7 +21,6 @@ exports.carouselItemsDisplay = function(driver, rawTemplate) {
 
 	// retrieve social section 
 	var socialSection = socialCarousel1.appear(driver);
-  var slickItems = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide"));
   
   // choose version to operate
   if( rawTemplate=='main-category') {
@@ -36,8 +35,6 @@ exports.carouselItemsDisplay = function(driver, rawTemplate) {
   else {  // rawTemplate='home'
     socialVersion(socialSection);
   }
-
-  return slickItems;
 }
 
 

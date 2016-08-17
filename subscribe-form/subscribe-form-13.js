@@ -16,6 +16,9 @@ var	subscribeForm9 = require('./subscribe-form-9.js');
  *	- click on "not you?" and expect a sign in modal
  *	- log in with a not-yet-subscribed-email and expect error
  *	- click "join now" and expect sign up modal
+ *	- close sign up modal
+ *	- click not you again, and enter an already-subscribed-email
+ *	- expect change in current logging in email
  */
 exports.notYou = function(driver, formPosition) {
 
@@ -45,4 +48,23 @@ exports.notYou = function(driver, formPosition) {
 	joinNow.click();
 	driver.wait(webdriver.until.elementIsVisible(modalSignUp), 5000);
 	driver.sleep(1000);
+	
+	// close sign up modal
+	var closeForm = modalSignUp.findElement(webdriver.By.css(".close-reveal-modal"));
+	closeForm.click();
+	driver.wait(webdriver.until.elementIsNotVisible(modalSignUp), 5000);
+	driver.sleep(1000);
+
+	// click not you again, and enter an already-subscribed-email
+	notYou.click();
+	driver.wait(webdriver.until.elementIsVisible(modalMember), 5000);
+	emailInput.clear();
+	emailInput.sendKeys('dngo@insidehook.com');
+	logIn.submit();
+	driver.wait(webdriver.until.stalenessOf(logIn), 5000);
+
+ 	// expect change in current logging in email
+ 	var userEmail = driver.findElement(webdriver.By.css(".email-html"));
+ 	expect(userEmail.getText(), "cannot log in with a different email").
+ 		to.eventually.equal('dngo@insidehook.com');
 }
