@@ -26,15 +26,15 @@ exports.categoryLinks = function(driver) {
     
     // exclude the last dropdown which is the cities drop down
     var index = Math.floor(Math.random() * (dropDownItems.length-1) );
-    var testCategory = dropDownItems[index].findElement(webdriver.By.css("a"));
-    testCategory.getAttribute('href').then(function(testUrl) {
+    var testCatItem = dropDownItems[index].findElement(webdriver.By.css("a"));
+    testCatItem.getText().then(function(linkText) {
 
-      testCategory.click();
-      driver.wait(webdriver.until.stalenessOf(testCategory), 10000);
+      testCatItem.click();
+      driver.wait(webdriver.until.stalenessOf(testCatItem), 10000);
       driver.getCurrentUrl().then(function(currentUrl) {
 
         expect(currentUrl, "main category clicks to wrong destination\n").
-          to.equal(testUrl);  
+          to.have.string(toUrlText(linkText));
       });
     });
   });
@@ -60,15 +60,15 @@ exports.categoryLinks = function(driver) {
 
       // exclude the first 3 items which are not sub categories
       var index = Math.floor(Math.random() * (subCategories.length-3) +3);
-      var testSubCat = subCategories[index];
-      testSubCat.getAttribute('href').then(function(testUrl) {
+      var testSubCatItem = subCategories[index];
+      testSubCatItem.getText().then(function(linkText) {
 
-        testSubCat.click();
-        driver.wait(webdriver.until.stalenessOf(testSubCat), 10000);
+        testSubCatItem.click();
+        driver.wait(webdriver.until.stalenessOf(testSubCatItem), 10000);
         driver.getCurrentUrl().then(function(currentUrl) {
 
           expect(currentUrl, "sub category clicks to wrong destination\n").
-            to.equal(testUrl);
+            to.have.string(toUrlText(linkText));
         });
       });
     });
@@ -82,15 +82,13 @@ exports.categoryLinks = function(driver) {
 
     // Test a specific main category
     var testCategory = driver.findElement(webdriver.By.linkText('WHERE TO GO'));
-    testCategory.getAttribute('href').then(function(testUrl) {
 
-      testCategory.click();
-      driver.wait(webdriver.until.stalenessOf(testCategory), 10000);
-      driver.getCurrentUrl().then(function(currentUrl) {
+    testCategory.click();
+    driver.wait(webdriver.until.stalenessOf(testCategory), 10000);
+    driver.getCurrentUrl().then(function(currentUrl) {
 
-        expect(currentUrl, "main category clicks to wrong destination").
-          to.equal(testUrl);
-      });
+      expect(currentUrl, "main category clicks to wrong destination").
+        to.have.string("where-to-go");
     });
 
     // Test a sepcific sub category
@@ -98,21 +96,30 @@ exports.categoryLinks = function(driver) {
     driver.actions().mouseMove(whatToBuy).perform(); 
     driver.sleep(1000);
     wheels = driver.findElement(webdriver.By.linkText("WHEELS"));
-    wheels.getAttribute('href').then(function(testUrl) {
 
-      wheels.click();
-      driver.wait(webdriver.until.stalenessOf(wheels), 10000);
-      driver.getCurrentUrl().then(function(currentUrl) {
+    wheels.click();
+    driver.wait(webdriver.until.stalenessOf(wheels), 10000);
+    driver.getCurrentUrl().then(function(currentUrl) {
         
-        expect(currentUrl, "sub category clicks to wrong destination").
-          to.equal(testUrl);  
-      });  
+      expect(currentUrl, "sub category clicks to wrong destination").
+        to.have.string("wheels");  
     });
   }
 
 };
 
 
+/**
+ *  Convert a string from a linkText to a string that appear in url
+ */ 
+var toUrlText = function(linkText) {
 
+  // convert to lower case
+    var str1 = linkText.toLowerCase();
+  // replace space with dash
+    var str2 = str1.replace(/ /g, "-");
+  // replace & with and
+    var str3 = str2.replace("&", "and");
 
-
+  return str3;
+}

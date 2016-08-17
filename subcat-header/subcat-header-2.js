@@ -30,13 +30,28 @@ exports.clickThrough = function(driver) {
 			var index = Math.floor(Math.random() * subcat.length);
 		}
 		
-		subcat[index].getAttribute('href').then(function(linkUrl) {
+		subcat[index].getText().then(function(linkText) {
 			subcat[index].click();
 			driver.wait(webdriver.until.stalenessOf(subcat[index]), 10000);
+			
 			expect(driver.getCurrentUrl(), "wrong destination\n").
-				to.eventually.equal(linkUrl);
+				to.eventually.have.string(toUrlText(linkText));
 		});
-		
 	});
-	
+}
+
+
+/**
+ *  Convert a string from a linkText to a string that appear in url
+ */ 
+var toUrlText = function(linkText) {
+
+  // convert to lower case
+    var str1 = linkText.toLowerCase();
+  // replace space with dash
+    var str2 = str1.replace(/ /g, "-");
+  // replace & with and
+    var str3 = str2.replace("&", "and");
+
+  return str3;
 }

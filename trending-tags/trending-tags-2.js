@@ -21,22 +21,37 @@ exports.tagsClick = function(driver) {
 
 		// check tags' url
 		for(var i=0; i<tags.length; i++) {
-			var tagsUrl = tags[i].findElement(webdriver.By.css("a"));
-			tagsUrl.getAttribute('href').then(function(tagsUrl) {
-				expect(tagsUrl).to.have.string('insidehook.com/tags/');
+			var tagLink = tags[i].findElement(webdriver.By.css("a"));
+			tagLink.getAttribute('href').then(function(tagUrl) {
+				expect(tagUrl).to.have.string('insidehook.com/tags/');
 			});
 		}
 
 		// click on a random tag
-		var testTags = Math.floor(Math.random() * tags.length);
-		var tagUrl = tags[testTags].findElement(webdriver.By.css("a"));
-		tagUrl.getAttribute('href').then(function(tagUrl) {
+		var index = Math.floor(Math.random() * tags.length);
+		var tagText = tags[index].findElement(webdriver.By.css("a h2"));
+		tagText.getText().then(function(linkText) {
 			
-			tags[testTags].click();
-			driver.wait(webdriver.until.stalenessOf(tags[testTags]), 10000);
+			tags[index].click();
+			driver.wait(webdriver.until.stalenessOf(tags[index]), 10000);
+			
 			expect(driver.getCurrentUrl(), "wrong destination\n").
-				to.eventually.equal(tagUrl);
+				to.eventually.have.string(toUrlText(linkText));
 		});
 	});
 
+}
+
+
+/**
+ *  Convert a string from a linkText to a string that appear in url
+ */ 
+var toUrlText = function(linkText) {
+
+  // convert to lower case
+    var str1 = linkText.toLowerCase();
+  // remove #
+    var str2 = str1.replace("#", "");
+
+  return str2;
 }

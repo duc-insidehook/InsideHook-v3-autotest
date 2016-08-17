@@ -92,13 +92,15 @@ var subCatVersion = function(driver, socialSection) {
 
     // test opening a random item
     var index = Math.floor(Math.random() * itemLinks.length);
-    itemLinks[index].getAttribute('href').then(function(itemUrl) {
+    var itemText = itemLinks[index].findElement(webdriver.By.css("h3"));
+    itemText.getText().then(function(itemText) {
+
       itemLinks[index].sendKeys(webdriver.Key.ESCAPE);
       itemLinks[index].click();
       driver.wait(webdriver.until.stalenessOf(itemLinks[index]), 10000);
 
       expect(driver.getCurrentUrl(), "wrong destination\n").
-        to.eventually.equal(itemUrl);
+        to.eventually.have.string(toUrlText(itemText));
     });
   });
 }
@@ -111,7 +113,6 @@ var goodsItemVersion = function(driver, socialSection) {
    *  - test opening a random item
    *  - print item's page title
    */
-
   var itemLinks = socialSection.findElements(webdriver.By.css(".slick-track .feed-item.allow-overlay.left.slick-slide.slick-active .th a"));
   itemLinks.then(function(itemLinks) {
     expect(itemLinks.length, "number of displaying item is not 4").
@@ -135,3 +136,18 @@ var goodsItemVersion = function(driver, socialSection) {
   });
 }
 
+
+/**
+ *  Convert a string from a linkText to a string that appear in url
+ */ 
+var toUrlText = function(linkText) {
+
+  // convert to lower case
+    var str1 = linkText.toLowerCase();
+  // replace space with dash
+    var str2 = str1.replace(/ /g, "-");
+  // replace & with and
+    var str3 = str2.replace("&", "and");
+
+  return str3;
+}
