@@ -3,19 +3,21 @@ var webdriver = require('selenium-webdriver'),
     webdriverSetup = require('../webdriver-setup.js'),
     generalSetup = require('../general-setup.js'),
     test = require('selenium-webdriver/testing'),
-    driver;
+    driver, rawTemplate;
 
 //  Import Files
 var contentFeed1 = require('./content-feed-1.js'),
     contentFeed2 = require('./content-feed-2.js'),
     contentFeed3 = require('./content-feed-3.js'),
     contentFeed4 = require('./content-feed-4.js'),
-    contentFeed5 = require('./content-feed-5.js');
+    contentFeed5 = require('./content-feed-5.js'),
+    contentFeed6 = require('./content-feed-6.js');
 
 
 test.before(function() {
   this.timeout(generalSetup.buildDriverTimeout());
   driver = webdriverSetup.loadDriver();
+  rawTemplate = webdriverSetup.rawTemplate();
   driver.getWindowHandle();
 });
 
@@ -39,7 +41,7 @@ test.describe('Content Feed', function() {
     contentFeed1.sevenItemsLatest(driver);
   }); 
   test.it('seven items appear in Editor\'s Picks', function() {
-    contentFeed2.sevenItemsPicks(driver);
+    contentFeed2.sevenItemsPicks(driver); 
   }); 
   test.it('items click through to appropriate destination', function() {
     contentFeed3.clickContentFeed(driver);
@@ -50,6 +52,9 @@ test.describe('Content Feed', function() {
   test.it('"More from InsideHook" becomes "This Is The End" when no more items exist', function() {
     contentFeed5.noMore(driver);
   });
-  
+  test.it('Goods banner clicks through to goods page', function() {
+    contentFeed6.goodsBanner(driver, rawTemplate);
+  });
+
 });
 
